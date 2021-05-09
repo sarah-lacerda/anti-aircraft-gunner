@@ -1,6 +1,9 @@
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
 
+import java.util.Objects;
+
+import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11C.GL_DEPTH_BUFFER_BIT;
@@ -30,6 +33,7 @@ public class Window {
     public void run() {
         init();
         loop();
+        terminateGracefully();
     }
 
     public void init() {
@@ -89,5 +93,15 @@ public class Window {
         }
 
         return windowAddress;
+    }
+
+    private void terminateGracefully() {
+        // Free the memory upon leaving
+        glfwFreeCallbacks(glfwWindowAddress);
+        glfwDestroyWindow(glfwWindowAddress);
+
+        // Terminate GLFW and free the error callback
+        glfwTerminate();
+        Objects.requireNonNull(glfwSetErrorCallback(null)).free();
     }
 }
