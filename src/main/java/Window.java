@@ -3,34 +3,45 @@ import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
 import util.Time;
 
-import java.nio.IntBuffer;
 import java.util.Objects;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
-import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.glfw.GLFW.GLFW_CONTEXT_VERSION_MAJOR;
+import static org.lwjgl.glfw.GLFW.GLFW_CONTEXT_VERSION_MINOR;
+import static org.lwjgl.glfw.GLFW.GLFW_FALSE;
+import static org.lwjgl.glfw.GLFW.GLFW_MAXIMIZED;
+import static org.lwjgl.glfw.GLFW.GLFW_OPENGL_CORE_PROFILE;
+import static org.lwjgl.glfw.GLFW.GLFW_OPENGL_FORWARD_COMPAT;
+import static org.lwjgl.glfw.GLFW.GLFW_OPENGL_PROFILE;
+import static org.lwjgl.glfw.GLFW.GLFW_RESIZABLE;
+import static org.lwjgl.glfw.GLFW.GLFW_TRUE;
+import static org.lwjgl.glfw.GLFW.GLFW_VISIBLE;
+import static org.lwjgl.glfw.GLFW.glfwCreateWindow;
+import static org.lwjgl.glfw.GLFW.glfwDestroyWindow;
+import static org.lwjgl.glfw.GLFW.glfwInit;
+import static org.lwjgl.glfw.GLFW.glfwMakeContextCurrent;
+import static org.lwjgl.glfw.GLFW.glfwPollEvents;
+import static org.lwjgl.glfw.GLFW.glfwSetErrorCallback;
+import static org.lwjgl.glfw.GLFW.glfwSetKeyCallback;
+import static org.lwjgl.glfw.GLFW.glfwShowWindow;
+import static org.lwjgl.glfw.GLFW.glfwSwapBuffers;
+import static org.lwjgl.glfw.GLFW.glfwTerminate;
+import static org.lwjgl.glfw.GLFW.glfwWindowHint;
+import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
+import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
+import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
+import static org.lwjgl.opengl.GL11.GL_TRUE;
+import static org.lwjgl.opengl.GL11.glOrtho;
 import static org.lwjgl.opengl.GL11C.glClear;
-import static org.lwjgl.opengl.GL15.*;
-import static org.lwjgl.opengl.GL15.GL_ARRAY_BUFFER;
-import static org.lwjgl.opengl.GL15.GL_STATIC_DRAW;
-import static org.lwjgl.opengl.GL20.*;
-import static org.lwjgl.opengl.GL30.glBindVertexArray;
-import static org.lwjgl.opengl.GL30.glGenVertexArrays;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
 public class Window {
-    private int width, height;
-    private String title;
+    private final int width;
+    private final int height;
+    private final String title;
 
     private static Window INSTANCE = null;
     private long glfwWindowAddress;
-
-    Scene scene = new Scene() {
-        @Override
-        public void update(float deltaTime) {
-
-        }
-    };
 
     private Window() {
         this.width = 1920;
@@ -81,7 +92,7 @@ public class Window {
         // bindings available for use.
         GL.createCapabilities();
 
-        scene.init();
+        glOrtho(-50, 50, -50, 50, 0, 1);
     }
 
 
@@ -92,19 +103,10 @@ public class Window {
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key
         while (!glfwWindowShouldClose(glfwWindowAddress)) {
-
-         /*   glMatrixMode(GL_PROJECTION);
-            glLoadIdentity(); // Resets any previous projection matrices
-            glOrtho(0, 640, 0, 480, 1, -1);
-            glMatrixMode(GL_MODELVIEW);
-*/
             // clear the framebuffer
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
             render();
-            if (dt >= 0) {
-                scene.update(dt);
-            }
 
             // swap the color buffers
             glfwSwapBuffers(glfwWindowAddress);
@@ -116,7 +118,6 @@ public class Window {
             dt = endTime - beginTime;
             beginTime = endTime;
         }
-
     }
 
     private void render() {
@@ -128,21 +129,25 @@ public class Window {
         glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE); // the window will stay hidden after creation
         glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE); // the window will be resizable
 
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-        glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-
-      //  glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
+        useClientVersion3(false);
 
         // Create the window
         long windowAddress = glfwCreateWindow(this.width, this.height, this.title, NULL, NULL);
 
-         if (windowAddress == NULL) {
+        if (windowAddress == NULL) {
             throw new RuntimeException("Failed to create the GLFW window");
         }
 
         return windowAddress;
+    }
+
+    private void useClientVersion3(boolean use) {
+        if (use) {
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+            glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+            glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+        }
     }
 
     private void setListeners() {
@@ -150,7 +155,7 @@ public class Window {
     }
 
     private void terminateGracefully() {
-        // Free the memory upon leaving
+        // Free memory upon leaving
         glfwFreeCallbacks(glfwWindowAddress);
         glfwDestroyWindow(glfwWindowAddress);
 
