@@ -9,7 +9,6 @@ public class KeyListener {
     private boolean[] keyPressed = new boolean[TOTAL_GLFW_KEY_BINDINGS];
 
     private KeyListener() {
-
     }
 
     public static KeyListener getInstance() {
