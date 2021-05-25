@@ -1,3 +1,4 @@
+import glfw.Window;
 
 import static de.damios.guacamole.gdx.StartOnFirstThreadHelper.startNewJvmIfRequired;
 
