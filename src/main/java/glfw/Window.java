@@ -106,8 +106,6 @@ public class Window {
         // Make the OpenGL context current
         glfwMakeContextCurrent(glfwWindowAddress);
 
-        // Make the window visible
-        glfwShowWindow(glfwWindowAddress);
 
         // This line is critical for LWJGL's interoperation with GLFW's
         // OpenGL context, or any context that is managed externally.
@@ -118,6 +116,8 @@ public class Window {
 
         setCoordinatePlane();
         setListeners();
+        // Make the window visible
+        glfwShowWindow(glfwWindowAddress);
     }
 
 
@@ -145,13 +145,6 @@ public class Window {
     }
 
     private long createAndConfigureWindow() {
-        // glfw.Window Configuration
-        glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE); // the window will stay hidden after creation
-        glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE); // the window will be resizable
-        glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
-
-        useClientVersion3(false);
-
         // Create the window
         long windowAddress = glfwCreateWindow(this.width, this.height, TITLE, NULL, NULL);
 
@@ -159,7 +152,12 @@ public class Window {
             throw new RuntimeException("Failed to create the GLFW window");
         }
 
+        // glfw window Configuration
         glfwSetWindowSizeLimits(windowAddress, MIN_WIDTH, MIN_HEIGHT, MAX_WIDTH, MAX_HEIGHT);
+        glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE); // the window will stay hidden after creation
+        glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE); // the window will be resizable
+        glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
+        useClientVersion3(false);
 
         return windowAddress;
     }
