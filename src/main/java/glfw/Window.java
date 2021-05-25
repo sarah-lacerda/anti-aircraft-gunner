@@ -1,10 +1,15 @@
-import listener.KeyListener;
+package glfw;
+
+import glfw.listener.KeyListener;
+import glfw.listener.WindowResizeListener;
+import model.EntityManager;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
 import util.Time;
 
 import java.util.Objects;
 
+import static geometry.configuration.CoordinatePlane.setCoordinatePlane;
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.GLFW_CONTEXT_VERSION_MAJOR;
 import static org.lwjgl.glfw.GLFW.GLFW_CONTEXT_VERSION_MINOR;
@@ -23,6 +28,8 @@ import static org.lwjgl.glfw.GLFW.glfwMakeContextCurrent;
 import static org.lwjgl.glfw.GLFW.glfwPollEvents;
 import static org.lwjgl.glfw.GLFW.glfwSetErrorCallback;
 import static org.lwjgl.glfw.GLFW.glfwSetKeyCallback;
+import static org.lwjgl.glfw.GLFW.glfwSetWindowSizeCallback;
+import static org.lwjgl.glfw.GLFW.glfwSetWindowSizeLimits;
 import static org.lwjgl.glfw.GLFW.glfwShowWindow;
 import static org.lwjgl.glfw.GLFW.glfwSwapBuffers;
 import static org.lwjgl.glfw.GLFW.glfwTerminate;
@@ -30,23 +37,30 @@ import static org.lwjgl.glfw.GLFW.glfwWindowHint;
 import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
 import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
+import static org.lwjgl.opengl.GL11.GL_DONT_CARE;
 import static org.lwjgl.opengl.GL11.GL_TRUE;
-import static org.lwjgl.opengl.GL11.glOrtho;
-import static org.lwjgl.opengl.GL11C.glClear;
+import static org.lwjgl.opengl.GL11.glClear;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
 public class Window {
-    private final int width;
-    private final int height;
-    private final String title;
+    private int width;
+    private int height;
+    private long glfwWindowAddress;
+    private EntityManager entityManager;
 
     private static Window INSTANCE = null;
-    private long glfwWindowAddress;
+
+    private static final int DEFAULT_WIDTH = 800;
+    private static final int DEFAULT_HEIGHT = 600;
+    private static final int MIN_WIDTH = 400;
+    private static final int MIN_HEIGHT = 600;
+    private static final int MAX_WIDTH = GL_DONT_CARE;
+    private static final int MAX_HEIGHT = GL_DONT_CARE;
+    private static final String TITLE = "Anti-aircraft Gunner";
 
     private Window() {
-        this.width = 1920;
-        this.height = 1080;
-        this.title = "Anti-aircraft Gunner";
+        this.width = DEFAULT_WIDTH;
+        this.height = DEFAULT_HEIGHT;
     }
 
     public static Window getInstance() {
@@ -62,7 +76,19 @@ public class Window {
         terminateGracefully();
     }
 
-    public void init() {
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    private void init() {
         // Setup an error callback. The default implementation
         // will print the error message in System.err.
         GLFWErrorCallback.createPrint(System.err).set();
@@ -77,8 +103,6 @@ public class Window {
 
         glfwWindowAddress = createAndConfigureWindow();
 
-        setListeners();
-
         // Make the OpenGL context current
         glfwMakeContextCurrent(glfwWindowAddress);
 
@@ -92,11 +116,12 @@ public class Window {
         // bindings available for use.
         GL.createCapabilities();
 
-        glOrtho(-50, 50, -50, 50, 0, 1);
+        setCoordinatePlane();
+        setListeners();
     }
 
 
-    public void loop() {
+    private void loop() {
         float beginTime = Time.getCurrentTimeInSeconds();
         float endTime;
         float dt = -1.0f;
@@ -106,8 +131,7 @@ public class Window {
             // clear the framebuffer
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-            render();
-
+            entityManager.renderEntities();
             // swap the color buffers
             glfwSwapBuffers(glfwWindowAddress);
             // Poll for window events. The key callback above will only be
@@ -120,23 +144,22 @@ public class Window {
         }
     }
 
-    private void render() {
-    }
-
     private long createAndConfigureWindow() {
-        // Window Configuration
-        glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
-        glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE); // the window will stay hidden after creation
-        glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE); // the window will be resizable
+        // glfw.Window Configuration
+        glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE); // the window will stay hidden after creation
+        glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE); // the window will be resizable
+        glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
 
         useClientVersion3(false);
 
         // Create the window
-        long windowAddress = glfwCreateWindow(this.width, this.height, this.title, NULL, NULL);
+        long windowAddress = glfwCreateWindow(this.width, this.height, TITLE, NULL, NULL);
 
         if (windowAddress == NULL) {
             throw new RuntimeException("Failed to create the GLFW window");
         }
+
+        glfwSetWindowSizeLimits(windowAddress, MIN_WIDTH, MIN_HEIGHT, MAX_WIDTH, MAX_HEIGHT);
 
         return windowAddress;
     }
@@ -151,7 +174,8 @@ public class Window {
     }
 
     private void setListeners() {
-        glfwSetKeyCallback(glfwWindowAddress, KeyListener::keyCallback);
+        glfwSetKeyCallback(glfwWindowAddress, KeyListener.getInstance());
+        glfwSetWindowSizeCallback(glfwWindowAddress, WindowResizeListener.getInstance());
     }
 
     private void terminateGracefully() {
