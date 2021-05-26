@@ -15,6 +15,8 @@ import static org.lwjgl.opengl.GL11.glVertex2f;
 
 public class Renderer {
 
+    private static final int FRAMES_PER_SECOND = 30;
+
     public static void drawRigidBody(Model model, float positionX, float positionY) {
         final String[] matrixRepresentation = model.getMatrix();
         final int numberOfColumnsForMatrix = model.getNumberOfColumns();
@@ -29,6 +31,10 @@ public class Renderer {
             }
         }
         glPopMatrix();
+    }
+
+    public static boolean canRender(double elapsedTimeSinceLastRendering) {
+        return elapsedTimeSinceLastRendering > 1.0 / FRAMES_PER_SECOND;
     }
 
     private static void drawCell(String color) {

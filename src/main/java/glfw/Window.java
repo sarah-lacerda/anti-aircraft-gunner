@@ -1,15 +1,15 @@
 package glfw;
 
+import entity.EntityManager;
 import glfw.listener.KeyListener;
 import glfw.listener.WindowResizeListener;
-import model.EntityManager;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
-import util.Time;
 
 import java.util.Objects;
 
 import static geometry.configuration.CoordinatePlane.setCoordinatePlane;
+import static glfw.Actions.handleActions;
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.GLFW_CONTEXT_VERSION_MAJOR;
 import static org.lwjgl.glfw.GLFW.GLFW_CONTEXT_VERSION_MINOR;
@@ -41,6 +41,9 @@ import static org.lwjgl.opengl.GL11.GL_DONT_CARE;
 import static org.lwjgl.opengl.GL11.GL_TRUE;
 import static org.lwjgl.opengl.GL11.glClear;
 import static org.lwjgl.system.MemoryUtil.NULL;
+import static render.Renderer.canRender;
+import static util.Time.getCurrentTimeInSeconds;
+import static util.Time.deltaTimeInSecondsFrom;
 
 public class Window {
     private int width;
@@ -72,7 +75,7 @@ public class Window {
 
     public void run() {
         init();
-        loop();
+        execution();
         terminateGracefully();
     }
 
@@ -121,27 +124,29 @@ public class Window {
     }
 
 
-    private void loop() {
-        float beginTime = Time.getCurrentTimeInSeconds();
-        float endTime;
-        float dt = -1.0f;
-        // Run the rendering loop until the user has attempted to close
-        // the window or has pressed the ESCAPE key
+    private void execution() {
+        double time = getCurrentTimeInSeconds();
+        double elapsedTimeSinceLastRendering = 0;
         while (!glfwWindowShouldClose(glfwWindowAddress)) {
-            // clear the framebuffer
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            elapsedTimeSinceLastRendering += deltaTimeInSecondsFrom(time);
+            time = getCurrentTimeInSeconds();
 
-            entityManager.renderEntities();
-            // swap the color buffers
-            glfwSwapBuffers(glfwWindowAddress);
-            // Poll for window events. The key callback above will only be
-            // invoked during this call.
+            if (canRender(elapsedTimeSinceLastRendering)) {
+                render();
+                elapsedTimeSinceLastRendering = 0;
+                handleActions(entityManager);
+            }
+            // Poll for window events.
             glfwPollEvents();
-
-            endTime = Time.getCurrentTimeInSeconds();
-            dt = endTime - beginTime;
-            beginTime = endTime;
         }
+    }
+
+    private void render() {
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        entityManager.renderEntities();
+
+        glfwSwapBuffers(glfwWindowAddress);
     }
 
     private long createAndConfigureWindow() {
