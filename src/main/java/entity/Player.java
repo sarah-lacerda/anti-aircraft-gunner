@@ -5,9 +5,11 @@ import model.Model;
 
 import static render.Renderer.drawRigidBody;
 
-public class Player extends Entity{
+public class Player extends Entity {
 
     float rotationAngle;
+
+    private final static float MAX_ANGLE_ROTATION = 80;
 
     public Player(Model model, Vertex position) {
         super(model, position);
@@ -15,7 +17,11 @@ public class Player extends Entity{
     }
 
     public void rotate(float angle) {
-        this.rotationAngle += angle;
+        if (this.rotationAngle < 0) {
+            this.rotationAngle = Math.max(this.rotationAngle + angle, -MAX_ANGLE_ROTATION);
+        } else {
+            this.rotationAngle = Math.min(this.rotationAngle + angle, MAX_ANGLE_ROTATION);
+        }
     }
 
     @Override
