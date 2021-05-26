@@ -1,8 +1,8 @@
+import entity.Entity;
+import entity.EntityManager;
 import entity.Player;
 import geometry.Vertex;
 import glfw.Window;
-import entity.Entity;
-import entity.EntityManager;
 import model.Model;
 import util.FileUtils;
 

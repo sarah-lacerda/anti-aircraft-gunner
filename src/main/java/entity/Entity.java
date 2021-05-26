@@ -28,7 +28,7 @@ public class Entity {
     }
 
     public void render() {
-        drawRigidBody(model, position.getX(), position.getY());
+        drawRigidBody(model, position, 0);
     }
 
     public Vertex getPosition() {
@@ -49,5 +49,9 @@ public class Entity {
 
     public void setPosition(Vertex position) {
         this.position = position;
+    }
+
+    protected Model getModel() {
+        return model;
     }
 }

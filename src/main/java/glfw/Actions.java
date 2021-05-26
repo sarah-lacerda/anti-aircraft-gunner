@@ -6,8 +6,7 @@ import geometry.Vertex;
 import glfw.listener.KeyListener;
 
 import static entity.Entity.UNIT_OF_MOVEMENT_PER_FRAME;
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT;
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT;
+import static org.lwjgl.glfw.GLFW.*;
 
 public class Actions {
 
@@ -24,6 +23,12 @@ public class Actions {
         }
         if (KeyListener.getInstance().isKeyPressed(GLFW_KEY_RIGHT)) {
             player.setPosition(moveRightFrom(currentPosition));
+        }
+        if (KeyListener.getInstance().isKeyPressed(GLFW_KEY_UP)) {
+            player.rotate(1);
+        }
+        if (KeyListener.getInstance().isKeyPressed(GLFW_KEY_DOWN)) {
+            player.rotate(-1);
         }
     }
 
