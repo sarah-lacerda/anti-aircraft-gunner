@@ -1,7 +1,8 @@
+import entity.Player;
 import geometry.Vertex;
 import glfw.Window;
-import model.Entity;
-import model.EntityManager;
+import entity.Entity;
+import entity.EntityManager;
 import model.Model;
 import util.FileUtils;
 
@@ -27,7 +28,7 @@ public class Game {
     private static Entity createMainCharacter() throws IOException {
         Model model = FileUtils.getModelFrom(MAIN_CHARACTER_MODEL_FILE_PATH);
         Vertex initialPosition = new Vertex(X_LOWER_BOUND + 4, X_LOWER_BOUND + 4);
-        return new Entity(model, initialPosition);
+        return new Player(model, initialPosition);
     }
 
     public static void main(String[] args) throws IOException {

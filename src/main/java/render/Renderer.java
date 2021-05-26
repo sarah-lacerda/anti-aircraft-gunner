@@ -15,7 +15,7 @@ import static org.lwjgl.opengl.GL11.glVertex2f;
 
 public class Renderer {
 
-    private static final int FRAMES_PER_SECOND = 30;
+    public static final int FRAMES_PER_SECOND = 30;
 
     public static void drawRigidBody(Model model, float positionX, float positionY) {
         final String[] matrixRepresentation = model.getMatrix();

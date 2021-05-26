@@ -28,7 +28,7 @@ public class KeyListener implements GLFWKeyCallbackI {
         }
     }
 
-    public static boolean isKeyPressed(int keyCode) {
+    public boolean isKeyPressed(int keyCode) {
         if (keyCode <= TOTAL_GLFW_KEY_BINDINGS) {
             return getInstance().keyPressed[keyCode];
         }

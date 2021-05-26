@@ -1,4 +1,4 @@
-package model;
+package entity;
 
 import java.util.List;
 
@@ -16,5 +16,13 @@ public class EntityManager {
 
     public void renderEntities() {
         entities.forEach(Entity::render);
+    }
+
+    public Player getPlayer() {
+        return (Player) entities.
+                stream()
+                .filter(entity -> entity.getClass() == Player.class)
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("Player is not instantiated"));
     }
 }
