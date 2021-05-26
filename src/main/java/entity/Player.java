@@ -7,7 +7,7 @@ import static render.Renderer.drawRigidBody;
 
 public class Player extends Entity {
 
-    float rotationAngle;
+    private float rotationAngle;
 
     private final static float MAX_ANGLE_ROTATION = 80;
 
