@@ -16,7 +16,7 @@ public class Renderer {
         final int numberOfColumnsForMatrix = model.getNumberOfColumns();
         final int numberOfLinesForMatrix = model.getNumberOfLines();
         final Vertex modelCenterPosition = new Vertex(
-                numberOfLinesForMatrix / 2.0, - numberOfColumnsForMatrix / 2.0
+                numberOfColumnsForMatrix / 2.0, - numberOfLinesForMatrix / 2.0
         );
 
         glPushMatrix();
