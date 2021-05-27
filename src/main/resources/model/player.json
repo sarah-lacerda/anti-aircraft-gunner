@@ -1,13 +1,13 @@
 {
   "matrixWithColors": [
-    "white", "white", "white", "white", "white", "olive", "olive", "olive", "white", "white", "white", "white", "white",
-    "white", "white", "white", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "white", "white", "white",
-    "white", "white", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "white", "white",
-    "white", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "white",
+    "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "olive", "olive", "olive", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK",
+    "BLANK", "BLANK", "BLANK", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "BLANK", "BLANK", "BLANK",
+    "BLANK", "BLANK", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "BLANK", "BLANK",
+    "BLANK", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "BLANK",
     "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive",
-    "white", "white", "olive", "olive", "olive", "white", "olive", "white", "olive", "olive", "olive", "white", "white",
-    "white", "white", "white", "olive", "white", "white", "white", "white", "white", "olive", "white" , "white", "white",
-    "white", "white", "white", "white", "white", "white", "white", "white", "white", "white", "white" , "white", "white"
+    "BLANK", "BLANK", "olive", "olive", "olive", "BLANK", "olive", "BLANK", "olive", "olive", "olive", "BLANK", "BLANK",
+    "BLANK", "BLANK", "BLANK", "olive", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "olive", "BLANK" , "BLANK", "BLANK",
+    "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK" , "BLANK", "BLANK"
   ],
   "columns": 13,
   "lines": 8

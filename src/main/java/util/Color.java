@@ -3,6 +3,7 @@ package util;
 import static java.util.Arrays.stream;
 
 public enum Color {
+    BLANK(-1f, -1f, -1f),
     BLACK(0.000f, 0.000f, 0.000f),
     WHITE(1.000f, 1.000f, 1.000f),
     RED(1.000f, 0.000f, 0.000f),

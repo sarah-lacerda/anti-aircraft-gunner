@@ -6,6 +6,8 @@ import model.Model;
 import util.Color;
 
 import static org.lwjgl.opengl.GL11.*;
+import static util.Color.BLANK;
+import static util.Color.from;
 
 public class Renderer {
 
@@ -40,14 +42,16 @@ public class Renderer {
     }
 
     private static void drawCell(String color) {
-        glBegin(GL_QUADS);
-        Color rgb = Color.from(color);
-        glColor3f(rgb.getRed(), rgb.getGreen(), rgb.getBlue());
-        glVertex2f(0, 0);
-        glVertex2f(0, -1);
-        glVertex2f(1, -1);
-        glVertex2f(1, 0);
-        glEnd();
+        Color rgb = from(color);
+        if (!rgb.equals(BLANK)) {
+            glBegin(GL_QUADS);
+            glColor3f(rgb.getRed(), rgb.getGreen(), rgb.getBlue());
+            glVertex2f(0, 0);
+            glVertex2f(0, -1);
+            glVertex2f(1, -1);
+            glVertex2f(1, 0);
+            glEnd();
+        }
     }
 
     private static boolean isLastCellForCurrentLine(int columns, int cellId) {
