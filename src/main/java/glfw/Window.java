@@ -5,6 +5,7 @@ import glfw.listener.KeyListener;
 import glfw.listener.WindowResizeListener;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
+import util.Color;
 
 import java.util.Objects;
 
@@ -40,8 +41,10 @@ import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.GL_DONT_CARE;
 import static org.lwjgl.opengl.GL11.GL_TRUE;
 import static org.lwjgl.opengl.GL11.glClear;
+import static org.lwjgl.opengl.GL11.glClearColor;
 import static org.lwjgl.system.MemoryUtil.NULL;
 import static render.Renderer.canRender;
+import static util.Color.WHITE;
 import static util.Time.getCurrentTimeInSeconds;
 import static util.Time.deltaTimeInSecondsFrom;
 
@@ -60,6 +63,7 @@ public class Window {
     private static final int MAX_WIDTH = GL_DONT_CARE;
     private static final int MAX_HEIGHT = GL_DONT_CARE;
     private static final String TITLE = "Anti-aircraft Gunner";
+    private static final Color BACKGROUND_COLOR = WHITE;
 
     private Window() {
         this.width = DEFAULT_WIDTH;
@@ -143,6 +147,7 @@ public class Window {
 
     private void render() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClearColor(BACKGROUND_COLOR.getRed(), BACKGROUND_COLOR.getGreen(), BACKGROUND_COLOR.getBlue(), 0.0f);
 
         entityManager.renderEntities();
 
