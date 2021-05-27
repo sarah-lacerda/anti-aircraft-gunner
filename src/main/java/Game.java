@@ -18,10 +18,14 @@ public class Game {
 
     private static final String MAIN_CHARACTER_MODEL_FILE_PATH = "model/player.json";
     private static final String ROCKET_LAUNCHER_MODEL_FILE_PATH = "model/rocketLauncher.json";
+    private static final String PROJECTILE_MODEL_FILE_PATH = "model/projectile.json";
 
     public static List<Entity> createEntities() throws IOException {
         List<Entity> entities = new LinkedList<>();
         entities.add(createMainCharacter());
+        Entity testProjectile = new Entity(FileUtils.getModelFrom(PROJECTILE_MODEL_FILE_PATH), new Vertex(-10, -10));
+        entities.add(testProjectile);
+
         return entities;
     }
 
