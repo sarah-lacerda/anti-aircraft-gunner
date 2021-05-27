@@ -1,0 +1,11 @@
+{
+  "matrixWithColors": [
+    "white", "white", "white", "black", "white", "white", "white",
+    "white", "white", "black", "black", "black", "white", "white",
+    "white", "black", "black", "black", "black", "black", "white",
+    "white", "white", "white", "black", "white", "white", "white",
+    "white", "white", "white", "black", "white", "white", "white"
+  ],
+  "columns": 7,
+  "lines": 5
+}

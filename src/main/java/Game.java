@@ -11,13 +11,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static de.damios.guacamole.gdx.StartOnFirstThreadHelper.startNewJvmIfRequired;
-import static geometry.configuration.CoordinatePlane.X_LOWER_BOUND;
 
 public class Game {
 
     private static final Window WINDOW = Window.getInstance();
 
-    private static final String MAIN_CHARACTER_MODEL_FILE_PATH = "model/test.json";
+    private static final String MAIN_CHARACTER_MODEL_FILE_PATH = "model/player.json";
+    private static final String ROCKET_LAUNCHER_MODEL_FILE_PATH = "model/rocketLauncher.json";
 
     public static List<Entity> createEntities() throws IOException {
         List<Entity> entities = new LinkedList<>();
@@ -26,9 +26,10 @@ public class Game {
     }
 
     private static Entity createMainCharacter() throws IOException {
-        Model model = FileUtils.getModelFrom(MAIN_CHARACTER_MODEL_FILE_PATH);
-        Vertex initialPosition = new Vertex(X_LOWER_BOUND + 4, X_LOWER_BOUND + 4);
-        return new Player(model, initialPosition);
+        Model playerModel = FileUtils.getModelFrom(MAIN_CHARACTER_MODEL_FILE_PATH);
+        Model rocketLauncherModel = FileUtils.getModelFrom(ROCKET_LAUNCHER_MODEL_FILE_PATH);
+        Vertex initialPosition = new Vertex(0, 0);
+        return new Player(playerModel, rocketLauncherModel, initialPosition);
     }
 
     public static void main(String[] args) throws IOException {

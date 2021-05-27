@@ -7,12 +7,14 @@ import static render.Renderer.drawRigidBody;
 
 public class Player extends Entity {
 
+    private final Model rocketLauncherModel;
     private float rotationAngle;
 
     private final static float MAX_ANGLE_ROTATION = 80;
 
-    public Player(Model model, Vertex position) {
-        super(model, position);
+    public Player(Model playerModel, Model rocketLauncherModel, Vertex position) {
+        super(playerModel, position);
+        this.rocketLauncherModel = rocketLauncherModel;
         this.rotationAngle = 0;
     }
 
@@ -26,6 +28,26 @@ public class Player extends Entity {
 
     @Override
     public void render() {
-        drawRigidBody(super.getModel(), super.getPosition(), rotationAngle);
+        final double modelXCenter = super.getModel().getNumberOfColumns() / 2.0;
+        final double modelYCenter = -super.getModel().getNumberOfLines() / 2.0;
+        final Vertex modelRotationPosition = new Vertex(modelXCenter, modelYCenter);
+
+        final double launcherRotationX = rocketLauncherModel.getNumberOfColumns() / 2.0;
+        final double launcherRotationY = -rocketLauncherModel.getNumberOfLines() + modelYCenter;
+        final Vertex rocketLauncherRotationPosition = new Vertex(launcherRotationX, launcherRotationY);
+
+        drawRigidBody(rocketLauncherModel, rocketLauncherPosition(), rocketLauncherRotationPosition, rotationAngle);
+        drawRigidBody(super.getModel(), super.getPosition(), modelRotationPosition, rotationAngle);
+    }
+
+    private Vertex rocketLauncherPosition() {
+        return new Vertex(
+                super.getPositionX()
+                        + ((super.getModel().getNumberOfColumns() - rocketLauncherModel.getNumberOfColumns())
+                        / 2.0
+                ),
+                super.getPositionY()
+                        + rocketLauncherModel.getNumberOfLines()
+        );
     }
 }

@@ -1,0 +1,14 @@
+{
+  "matrixWithColors": [
+    "white", "white", "white", "white", "white", "olive", "olive", "olive", "white", "white", "white", "white", "white",
+    "white", "white", "white", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "white", "white", "white",
+    "white", "white", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "white", "white",
+    "white", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "white",
+    "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive",
+    "white", "white", "olive", "olive", "olive", "white", "olive", "white", "olive", "olive", "olive", "white", "white",
+    "white", "white", "white", "olive", "white", "white", "white", "white", "white", "olive", "white" , "white", "white",
+    "white", "white", "white", "white", "white", "white", "white", "white", "white", "white", "white" , "white", "white"
+  ],
+  "columns": 13,
+  "lines": 8
+}

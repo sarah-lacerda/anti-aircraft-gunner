@@ -11,17 +11,14 @@ public class Renderer {
 
     public static final int FRAMES_PER_SECOND = 30;
 
-    public static void drawRigidBody(Model model, Vertex position, float rotationAngle) {
+    public static void drawRigidBody(Model model, Vertex position, Vertex rotationPosition, float rotationAngle) {
         final String[] matrixRepresentation = model.getMatrix();
         final int numberOfColumnsForMatrix = model.getNumberOfColumns();
-        final int numberOfLinesForMatrix = model.getNumberOfLines();
-        final Vertex modelCenterPosition = new Vertex(
-                numberOfColumnsForMatrix / 2.0, - numberOfLinesForMatrix / 2.0
-        );
 
         glPushMatrix();
+
         glTranslatef(position.getX(), position.getY(), 0);
-        rotateAround(modelCenterPosition, rotationAngle);
+        rotateAround(rotationPosition, rotationAngle);
         for (int cellId = 1; cellId <= matrixRepresentation.length; cellId++) {
             drawCell(getColorForCell(cellId, matrixRepresentation));
             glTranslatef(1, 0, 0);
