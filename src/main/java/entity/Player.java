@@ -7,15 +7,32 @@ import static render.Renderer.drawRigidBody;
 
 public class Player extends Entity {
 
-    private final Model rocketLauncherModel;
+    private final RocketLauncher rocketLauncher;
     private float rotationAngle;
 
     private final static float MAX_ANGLE_ROTATION = 80;
 
     public Player(Model playerModel, Model rocketLauncherModel, Vertex position) {
         super(playerModel, position);
-        this.rocketLauncherModel = rocketLauncherModel;
         this.rotationAngle = 0;
+        rocketLauncher = new RocketLauncher(
+                rocketLauncherModel,
+                position,
+                getModel().getNumberOfColumns(),
+                getModel().getNumberOfLines()
+        );
+    }
+
+    public void unloadRocketLauncher() {
+        rocketLauncher.unload();
+    }
+
+    public void chargeRocketLauncher() {
+        rocketLauncher.charge();
+    }
+
+    public void shoot() {
+        // TODO: Implement me!
     }
 
     public void rotate(float angle) {
@@ -24,30 +41,33 @@ public class Player extends Entity {
         } else {
             this.rotationAngle = Math.min(this.rotationAngle + angle, MAX_ANGLE_ROTATION);
         }
+        rocketLauncher.setRotationAngle(this.rotationAngle);
+    }
+
+    @Override
+    public void setPosition(float x, float y) {
+        super.setPosition(x, y);
+        rocketLauncher.setPlayerPosition(new Vertex(x, y));
+    }
+
+    @Override
+    public void setPosition(Vertex position) {
+        super.setPosition(position);
+        rocketLauncher.setPlayerPosition(position);
     }
 
     @Override
     public void render() {
         final double modelXCenter = super.getModel().getNumberOfColumns() / 2.0;
         final double modelYCenter = -super.getModel().getNumberOfLines() / 2.0;
-        final Vertex modelRotationPosition = new Vertex(modelXCenter, modelYCenter);
+        final Vertex playerModelRotationPosition = new Vertex(modelXCenter, modelYCenter);
 
-        final double launcherRotationX = rocketLauncherModel.getNumberOfColumns() / 2.0;
-        final double launcherRotationY = -rocketLauncherModel.getNumberOfLines() + modelYCenter;
-        final Vertex rocketLauncherRotationPosition = new Vertex(launcherRotationX, launcherRotationY);
-
-        drawRigidBody(rocketLauncherModel, rocketLauncherPosition(), rocketLauncherRotationPosition, rotationAngle);
-        drawRigidBody(super.getModel(), super.getPosition(), modelRotationPosition, rotationAngle);
-    }
-
-    private Vertex rocketLauncherPosition() {
-        return new Vertex(
-                super.getPositionX()
-                        + ((super.getModel().getNumberOfColumns() - rocketLauncherModel.getNumberOfColumns())
-                        / 2.0
-                ),
-                super.getPositionY()
-                        + rocketLauncherModel.getNumberOfLines()
+        rocketLauncher.render();
+        drawRigidBody(
+                super.getModel(),
+                super.getPosition(),
+                playerModelRotationPosition,
+                rotationAngle
         );
     }
 }

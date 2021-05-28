@@ -18,17 +18,29 @@ public class Actions {
         final Player player = entityManager.getPlayer();
         final Vertex currentPosition = player.getPosition();
 
-        if (KeyListener.getInstance().isKeyPressed(GLFW_KEY_LEFT)) {
+        final KeyListener keyListener = KeyListener.getInstance();
+
+        if (keyListener.isKeyPressed(GLFW_KEY_LEFT)) {
             player.setPosition(moveLeftFrom(currentPosition));
         }
-        if (KeyListener.getInstance().isKeyPressed(GLFW_KEY_RIGHT)) {
+        if (keyListener.isKeyPressed(GLFW_KEY_RIGHT)) {
             player.setPosition(moveRightFrom(currentPosition));
         }
-        if (KeyListener.getInstance().isKeyPressed(GLFW_KEY_UP)) {
+        if (keyListener.isKeyPressed(GLFW_KEY_UP)) {
             player.rotate(1);
         }
-        if (KeyListener.getInstance().isKeyPressed(GLFW_KEY_DOWN)) {
+        if (keyListener.isKeyPressed(GLFW_KEY_DOWN)) {
             player.rotate(-1);
+        }
+        if (keyListener.isKeyPressed(GLFW_KEY_LEFT_SHIFT) &&
+                KeyListener.getInstance().isKeyPressed(GLFW_KEY_SPACE)) {
+            player.shoot();
+            player.unloadRocketLauncher();
+        } else if (keyListener.isKeyPressed(GLFW_KEY_LEFT_SHIFT)) {
+            player.chargeRocketLauncher();
+        }
+        if (!KeyListener.getInstance().isKeyPressed(GLFW_KEY_LEFT_SHIFT)) {
+            player.unloadRocketLauncher();
         }
     }
 

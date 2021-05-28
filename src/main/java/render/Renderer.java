@@ -12,6 +12,7 @@ import static org.lwjgl.opengl.GL11.glEnd;
 import static org.lwjgl.opengl.GL11.glPopMatrix;
 import static org.lwjgl.opengl.GL11.glPushMatrix;
 import static org.lwjgl.opengl.GL11.glRotatef;
+import static org.lwjgl.opengl.GL11.glScaled;
 import static org.lwjgl.opengl.GL11.glTranslatef;
 import static org.lwjgl.opengl.GL11.glVertex2f;
 import static util.Color.BLANK;
@@ -21,7 +22,58 @@ public class Renderer {
 
     public static final int FRAMES_PER_SECOND = 30;
 
-    public static void drawRigidBody(Model model, Vertex position, Vertex rotationPosition, float rotationAngle) {
+    public static void drawRigidBody(
+            Model model,
+            Vertex position,
+            Vertex scalePosition,
+            double xScaleFactor,
+            double yScaleFactor,
+            Vertex rotationPosition,
+            float rotationAngle
+    ) {
+        drawRigidBody(
+                model,
+                position,
+                scalePosition,
+                xScaleFactor,
+                yScaleFactor,
+                rotationPosition,
+                rotationAngle,
+                null
+        );
+    }
+
+    public static void drawRigidBody(
+            Model model,
+            Vertex position,
+            Vertex rotationPosition,
+            float rotationAngle
+    ) {
+        drawRigidBody(
+                model,
+                position,
+                null,
+                0.0,
+                0.0,
+                rotationPosition,
+                rotationAngle
+        );
+    }
+
+    public static void drawRigidBody(Model model, Vertex position) {
+        drawRigidBody(model, position, null, 0);
+    }
+
+    public static void drawRigidBody(
+            Model model,
+            Vertex position,
+            Vertex scalePosition,
+            double xScaleFactor,
+            double yScaleFactor,
+            Vertex rotationPosition,
+            float rotationAngle,
+            Color staticColor
+    ) {
         final String[] matrixRepresentation = model.getMatrix();
         final int numberOfColumnsForMatrix = model.getNumberOfColumns();
 
@@ -29,8 +81,9 @@ public class Renderer {
 
         glTranslatef(position.getX(), position.getY(), 0);
         rotateAround(rotationPosition, rotationAngle);
+        scale(scalePosition, xScaleFactor, yScaleFactor);
         for (int cellId = 1; cellId <= matrixRepresentation.length; cellId++) {
-            drawCell(getColorForCell(cellId, matrixRepresentation));
+            drawCell(getColorForCell(cellId, matrixRepresentation, staticColor));
             glTranslatef(1, 0, 0);
             if (isLastCellForCurrentLine(numberOfColumnsForMatrix, cellId)) {
                 glTranslatef(-numberOfColumnsForMatrix, -1, 0);
@@ -43,17 +96,26 @@ public class Renderer {
         return elapsedTimeSinceLastRendering > 1.0 / FRAMES_PER_SECOND;
     }
 
-    private static void rotateAround(Vertex vertex, float angle) {
-        glTranslatef(vertex.getX(), vertex.getY(), 0);
-        glRotatef(angle, 0, 0, 1);
-        glTranslatef(-vertex.getX(), -vertex.getY(), 0);
+    private static void scale(Vertex position, double xScaleFactor, double yScaleFactor) {
+        if (position != null) {
+            glTranslatef(position.getX(), position.getY(), 0);
+            glScaled(xScaleFactor, yScaleFactor, 0);
+            glTranslatef(-position.getX(), -position.getY(), 0);
+        }
     }
 
-    private static void drawCell(String color) {
-        Color rgb = from(color);
-        if (!rgb.equals(BLANK)) {
+    private static void rotateAround(Vertex vertex, float angle) {
+        if (vertex != null) {
+            glTranslatef(vertex.getX(), vertex.getY(), 0);
+            glRotatef(angle, 0, 0, 1);
+            glTranslatef(-vertex.getX(), -vertex.getY(), 0);
+        }
+    }
+
+    private static void drawCell(Color color) {
+        if (!color.equals(BLANK)) {
             glBegin(GL_QUADS);
-            glColor3f(rgb.getRed(), rgb.getGreen(), rgb.getBlue());
+            glColor3f(color.getRed(), color.getGreen(), color.getBlue());
             glVertex2f(0, 0);
             glVertex2f(0, -1);
             glVertex2f(1, -1);
@@ -66,8 +128,12 @@ public class Renderer {
         return cellId % columns == 0;
     }
 
-    private static String getColorForCell(int i, String[] matrix) {
-        return matrix[i - 1];
+    private static Color getColorForCell(int i, String[] matrix, Color overrideColor) {
+        Color color = from(matrix[i - 1]);
+        if (overrideColor != null && !color.equals(BLANK)) {
+            return overrideColor;
+        }
+        return color;
     }
 
 }

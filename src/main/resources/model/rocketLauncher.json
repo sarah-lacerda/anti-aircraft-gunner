@@ -1,11 +1,10 @@
 {
   "matrixWithColors": [
-    "BLANK", "BLANK", "BLANK", "black", "BLANK", "BLANK", "BLANK",
-    "BLANK", "BLANK", "black", "black", "black", "BLANK", "BLANK",
-    "BLANK", "black", "black", "black", "black", "black", "BLANK",
-    "BLANK", "BLANK", "BLANK", "black", "BLANK", "BLANK", "BLANK",
-    "BLANK", "BLANK", "BLANK", "black", "BLANK", "BLANK", "BLANK"
+    "BLANK", "BLANK", "BLANK", "gray", "BLANK", "BLANK", "BLANK",
+    "BLANK", "BLANK", "gray", "gray", "gray", "BLANK", "BLANK",
+    "BLANK", "gray", "BLANK", "gray", "BLANK", "gray", "BLANK",
+    "BLANK", "BLANK", "BLANK", "gray", "BLANK", "BLANK", "BLANK"
   ],
   "columns": 7,
-  "lines": 5
+  "lines": 4
 }
