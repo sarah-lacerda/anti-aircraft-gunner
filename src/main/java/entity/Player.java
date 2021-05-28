@@ -10,7 +10,7 @@ public class Player extends Entity {
     private final RocketLauncher rocketLauncher;
     private float rotationAngle;
 
-    private final static float MAX_ANGLE_ROTATION = 80;
+    private final static float MAX_ANGLE_ROTATION = 80f;
 
     public Player(Model playerModel, Model rocketLauncherModel, Vertex position) {
         super(playerModel, position);
@@ -58,8 +58,8 @@ public class Player extends Entity {
 
     @Override
     public void render() {
-        final double modelXCenter = super.getModel().getNumberOfColumns() / 2.0;
-        final double modelYCenter = -super.getModel().getNumberOfLines() / 2.0;
+        final float modelXCenter = super.getModel().getNumberOfColumns() / 2.0f;
+        final float modelYCenter = -super.getModel().getNumberOfLines() / 2.0f;
         final Vertex playerModelRotationPosition = new Vertex(modelXCenter, modelYCenter);
 
         rocketLauncher.render();

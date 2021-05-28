@@ -14,11 +14,11 @@ public class RocketLauncher extends Entity {
     private final int playerModelWidth;
     private final int playerModelHeight;
     private float rotationAngle;
-    private double launcherStrength;
+    private float launcherStrength;
 
-    private final static double LAUNCHER_SECONDS_UNTIL_FULL = 2.00;
-    private final static double LAUNCHER_MAX_POWER = 8.00;
-    private final static double LAUNCHER_CHARGE_RATE =
+    private final static float LAUNCHER_SECONDS_UNTIL_FULL = 2.00f;
+    private final static float LAUNCHER_MAX_POWER = 8.00f;
+    private final static float LAUNCHER_CHARGE_RATE =
             LAUNCHER_MAX_POWER / (LAUNCHER_SECONDS_UNTIL_FULL * FRAMES_PER_SECOND);
 
     public RocketLauncher(Model model, Vertex playerPosition, int playerModelWidth, int playerModelHeight) {
@@ -50,11 +50,11 @@ public class RocketLauncher extends Entity {
 
     @Override
     public void render() {
-        final double playerYCenter = -playerModelHeight / 2.0;
-        final double launcherXCenter = model.getNumberOfColumns() / 2.0;
+        final float playerYCenter = -playerModelHeight / 2.0f;
+        final float launcherXCenter = model.getNumberOfColumns() / 2.0f;
 
-        final double xScaleFactor = 1;
-        final double yScaleFactor = launcherStrength / (LAUNCHER_MAX_POWER / 2.0);
+        final float xScaleFactor = 1;
+        final float yScaleFactor = launcherStrength / (LAUNCHER_MAX_POWER / 2.0f);
 
         if (launcherStrength >= LAUNCHER_MAX_POWER) {
             drawRigidBody(
@@ -96,18 +96,18 @@ public class RocketLauncher extends Entity {
         return position().getY();
     }
 
-    private Vertex scalePosition(double launcherXCenter) {
+    private Vertex scalePosition(float launcherXCenter) {
         return new Vertex(launcherXCenter, -model.getNumberOfLines());
     }
 
-    private Vertex rotationPosition(double launcherXCenter, double playerYCenter) {
-        final double launcherRotationY = -model.getNumberOfLines() + playerYCenter;
+    private Vertex rotationPosition(float launcherXCenter, float playerYCenter) {
+        final float launcherRotationY = -model.getNumberOfLines() + playerYCenter;
         return new Vertex(launcherXCenter, launcherRotationY);
     }
 
     private Vertex position() {
         return new Vertex(
-                playerPosition.getX() + ((playerModelWidth - model.getNumberOfColumns()) / 2.0)
+                playerPosition.getX() + ((playerModelWidth - model.getNumberOfColumns()) / 2.0f)
                 ,
                 playerPosition.getY() + model.getNumberOfLines()
         );

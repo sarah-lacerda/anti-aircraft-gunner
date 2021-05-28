@@ -23,7 +23,7 @@ public class Game {
     public static List<Entity> createEntities() throws IOException {
         List<Entity> entities = new LinkedList<>();
         entities.add(createMainCharacter());
-        Entity testProjectile = new Entity(FileUtils.getModelFrom(PROJECTILE_MODEL_FILE_PATH), new Vertex(-10, -10));
+        Entity testProjectile = new Entity(FileUtils.getModelFrom(PROJECTILE_MODEL_FILE_PATH), new Vertex(-10f, -10f));
         entities.add(testProjectile);
 
         return entities;

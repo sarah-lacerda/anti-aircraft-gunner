@@ -12,7 +12,8 @@ import static org.lwjgl.opengl.GL11.glEnd;
 import static org.lwjgl.opengl.GL11.glPopMatrix;
 import static org.lwjgl.opengl.GL11.glPushMatrix;
 import static org.lwjgl.opengl.GL11.glRotatef;
-import static org.lwjgl.opengl.GL11.glScaled;
+import static org.lwjgl.opengl.GL11.glScalef;
+import static org.lwjgl.opengl.GL11.glTranslated;
 import static org.lwjgl.opengl.GL11.glTranslatef;
 import static org.lwjgl.opengl.GL11.glVertex2f;
 import static util.Color.BLANK;
@@ -26,8 +27,8 @@ public class Renderer {
             Model model,
             Vertex position,
             Vertex scalePosition,
-            double xScaleFactor,
-            double yScaleFactor,
+            float xScaleFactor,
+            float yScaleFactor,
             Vertex rotationPosition,
             float rotationAngle
     ) {
@@ -53,8 +54,8 @@ public class Renderer {
                 model,
                 position,
                 null,
-                0.0,
-                0.0,
+                0.0f,
+                0.0f,
                 rotationPosition,
                 rotationAngle
         );
@@ -68,8 +69,8 @@ public class Renderer {
             Model model,
             Vertex position,
             Vertex scalePosition,
-            double xScaleFactor,
-            double yScaleFactor,
+            float xScaleFactor,
+            float yScaleFactor,
             Vertex rotationPosition,
             float rotationAngle,
             Color staticColor
@@ -79,7 +80,7 @@ public class Renderer {
 
         glPushMatrix();
 
-        glTranslatef(position.getX(), position.getY(), 0);
+        glTranslated(position.getX(), position.getY(), 0);
         rotateAround(rotationPosition, rotationAngle);
         scale(scalePosition, xScaleFactor, yScaleFactor);
         for (int cellId = 1; cellId <= matrixRepresentation.length; cellId++) {
@@ -93,13 +94,13 @@ public class Renderer {
     }
 
     public static boolean canRender(double elapsedTimeSinceLastRendering) {
-        return elapsedTimeSinceLastRendering > 1.0 / FRAMES_PER_SECOND;
+        return elapsedTimeSinceLastRendering > 1.0f / FRAMES_PER_SECOND;
     }
 
-    private static void scale(Vertex position, double xScaleFactor, double yScaleFactor) {
+    private static void scale(Vertex position, float xScaleFactor, float yScaleFactor) {
         if (position != null) {
             glTranslatef(position.getX(), position.getY(), 0);
-            glScaled(xScaleFactor, yScaleFactor, 0);
+            glScalef(xScaleFactor, yScaleFactor, 0);
             glTranslatef(-position.getX(), -position.getY(), 0);
         }
     }
@@ -117,9 +118,9 @@ public class Renderer {
             glBegin(GL_QUADS);
             glColor3f(color.getRed(), color.getGreen(), color.getBlue());
             glVertex2f(0, 0);
-            glVertex2f(0, -1);
-            glVertex2f(1, -1);
-            glVertex2f(1, 0);
+            glVertex2f(0, -1f);
+            glVertex2f(1f, -1f);
+            glVertex2f(1f, 0);
             glEnd();
         }
     }

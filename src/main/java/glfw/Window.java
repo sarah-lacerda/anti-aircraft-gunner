@@ -140,7 +140,6 @@ public class Window {
                 elapsedTimeSinceLastRendering = 0;
                 handleActions(entityManager);
             }
-            // Poll for window events.
             glfwPollEvents();
         }
     }

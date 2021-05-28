@@ -28,7 +28,7 @@ public class Entity {
     }
 
     public void render() {
-        drawRigidBody(model, position, null, 0.00, 0.00, null, 0);
+        drawRigidBody(model, position);
     }
 
     public Vertex getPosition() {
