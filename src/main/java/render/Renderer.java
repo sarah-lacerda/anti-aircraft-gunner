@@ -76,13 +76,16 @@ public class Renderer {
             Color staticColor
     ) {
         final String[] matrixRepresentation = model.getMatrix();
-        final int numberOfColumnsForMatrix = model.getNumberOfColumns();
+        final int numberOfColumnsForMatrix = model.getWidth();
 
         glPushMatrix();
 
         glTranslated(position.getX(), position.getY(), 0);
+
         rotateAround(rotationPosition, rotationAngle);
+
         scale(scalePosition, xScaleFactor, yScaleFactor);
+
         for (int cellId = 1; cellId <= matrixRepresentation.length; cellId++) {
             drawCell(getColorForCell(cellId, matrixRepresentation, staticColor));
             glTranslatef(1, 0, 0);

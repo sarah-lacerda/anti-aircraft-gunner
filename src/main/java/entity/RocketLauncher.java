@@ -1,5 +1,6 @@
 package entity;
 
+import geometry.Dimension;
 import geometry.Vertex;
 import model.Model;
 import util.Color;
@@ -13,8 +14,7 @@ public class RocketLauncher extends Entity {
 
     private final Model model;
     private Vertex playerPosition;
-    private final int playerModelWidth;
-    private final int playerModelHeight;
+    private final Dimension playerDimension;
     private float rotationAngle;
     private float launcherStrength;
 
@@ -23,12 +23,11 @@ public class RocketLauncher extends Entity {
     private final static float LAUNCHER_CHARGE_RATE =
             LAUNCHER_MAX_POWER / (LAUNCHER_SECONDS_UNTIL_FULL * FRAMES_PER_SECOND);
 
-    public RocketLauncher(Model model, Vertex playerPosition, int playerModelWidth, int playerModelHeight) {
+    public RocketLauncher(Model model, Vertex playerPosition, Dimension playerDimension) {
         super(model, null);
         this.model = model;
         this.playerPosition = playerPosition;
-        this.playerModelWidth = playerModelWidth;
-        this.playerModelHeight = playerModelHeight;
+        this.playerDimension = playerDimension;
         this.rotationAngle = 0;
     }
 
@@ -51,13 +50,13 @@ public class RocketLauncher extends Entity {
     }
 
     public Projectile shoot() {
-        return createProjectile(playerPosition, playerModelWidth, launcherStrength, rotationAngle);
+        return createProjectile(playerPosition, playerDimension, launcherStrength, rotationAngle);
     }
 
     @Override
     public void render() {
-        final float playerYCenter = -playerModelHeight / 2.0f;
-        final float launcherXCenter = model.getNumberOfColumns() / 2.0f;
+        final float playerYCenter = - playerDimension.getHeight() / 2.0f;
+        final float launcherXCenter = model.getWidth() / 2.0f;
 
         final float xScaleFactor = 1;
         final float yScaleFactor = launcherStrength / (LAUNCHER_MAX_POWER / 2.0f);
@@ -92,19 +91,19 @@ public class RocketLauncher extends Entity {
     }
 
     private Vertex scalePosition(float launcherXCenter) {
-        return new Vertex(launcherXCenter, -model.getNumberOfLines());
+        return new Vertex(launcherXCenter, - model.getHeight());
     }
 
     private Vertex rotationPosition(float launcherXCenter, float playerYCenter) {
-        final float launcherRotationY = -model.getNumberOfLines() + playerYCenter;
+        final float launcherRotationY = - model.getHeight() + playerYCenter;
         return new Vertex(launcherXCenter, launcherRotationY);
     }
 
     private Vertex position() {
         return new Vertex(
-                playerPosition.getX() + ((playerModelWidth - model.getNumberOfColumns()) / 2.0f)
+                playerPosition.getX() + ((playerDimension.getWidth() - model.getWidth()) / 2.0f)
                 ,
-                playerPosition.getY() + model.getNumberOfLines()
+                playerPosition.getY() + model.getHeight()
         );
     }
 }

@@ -14,12 +14,12 @@ public class Player extends Entity {
 
     public Player(Model playerModel, Model rocketLauncherModel, Vertex position) {
         super(playerModel, position);
+
         this.rotationAngle = 0;
         rocketLauncher = new RocketLauncher(
                 rocketLauncherModel,
                 position,
-                getModel().getNumberOfColumns(),
-                getModel().getNumberOfLines()
+                playerModel.getDimension()
         );
     }
 
@@ -58,8 +58,8 @@ public class Player extends Entity {
 
     @Override
     public void render() {
-        final float modelXCenter = getModel().getNumberOfColumns() / 2.0f;
-        final float modelYCenter = - getModel().getNumberOfLines() / 2.0f;
+        final float modelXCenter = getModel().getWidth() / 2.0f;
+        final float modelYCenter = - getModel().getHeight() / 2.0f;
         final Vertex modelRotationPosition = new Vertex(modelXCenter, modelYCenter);
 
         rocketLauncher.render();
