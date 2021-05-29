@@ -18,7 +18,9 @@ public class EntityManager {
     }
 
     public void addEntity(Entity entity) {
-        entities.add(entity);
+        if (entity != null) {
+            entities.add(entity);
+        }
     }
 
     public void renderEntities() {
@@ -35,7 +37,7 @@ public class EntityManager {
 
     public static Projectile createProjectile(Vertex shooterPosition,
                                               Dimension shooterDimension,
-                                              double force,
+                                              float force,
                                               float angle) {
         try {
             return new Projectile(createModelFrom(PROJECTILE_MODEL_FILEPATH),

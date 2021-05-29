@@ -19,6 +19,7 @@ public class RocketLauncher extends Entity {
     private float launcherStrength;
 
     private final static float LAUNCHER_SECONDS_UNTIL_FULL = 2.00f;
+    private final static float LAUNCHER_MIN_POWER = 1.0f;
     private final static float LAUNCHER_MAX_POWER = 8.00f;
     private final static float LAUNCHER_CHARGE_RATE =
             LAUNCHER_MAX_POWER / (LAUNCHER_SECONDS_UNTIL_FULL * FRAMES_PER_SECOND);
@@ -50,7 +51,10 @@ public class RocketLauncher extends Entity {
     }
 
     public Projectile shoot() {
-        return createProjectile(playerPosition, playerDimension, launcherStrength, rotationAngle);
+        if (launcherStrength >= LAUNCHER_MIN_POWER) {
+            return createProjectile(playerPosition, playerDimension, launcherStrength, rotationAngle);
+        }
+        return null;
     }
 
     @Override
