@@ -34,7 +34,7 @@ public class Actions {
         }
         if (keyListener.isKeyPressed(GLFW_KEY_LEFT_SHIFT) &&
                 KeyListener.getInstance().isKeyPressed(GLFW_KEY_SPACE)) {
-            player.shoot();
+            entityManager.addEntity(player.shoot());
             player.unloadRocketLauncher();
         } else if (keyListener.isKeyPressed(GLFW_KEY_LEFT_SHIFT)) {
             player.chargeRocketLauncher();

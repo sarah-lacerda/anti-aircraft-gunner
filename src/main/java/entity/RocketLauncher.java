@@ -48,6 +48,10 @@ public class RocketLauncher extends Entity {
         }
     }
 
+    public Projectile shoot() {
+        return createProjectile(playerPosition, playerModelWidth, launcherStrength, rotationAngle);
+    }
+
     @Override
     public void render() {
         final float playerYCenter = -playerModelHeight / 2.0f;

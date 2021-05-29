@@ -1,20 +1,19 @@
 package util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import model.Model;
 
 import java.io.IOException;
 import java.io.InputStream;
 
 public class FileUtils {
 
-    private static final ObjectMapper objectMapper = new ObjectMapper();
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
-    public static Model getModelFrom(String filePath) throws IOException {
-        return objectMapper.readValue(getFileFromResourceAsStream(filePath), Model.class);
+    public static <T> T deserializeFrom(String filePath, Class<T> targetClass) throws IOException {
+        return OBJECT_MAPPER.readValue(getFileFromResourceAsStream(filePath), targetClass);
     }
 
-    private static InputStream getFileFromResourceAsStream(String filePath) {
+    public static InputStream getFileFromResourceAsStream(String filePath) {
         InputStream inputStream = FileUtils.class.getClassLoader().getResourceAsStream(filePath);
 
         if (inputStream == null) {
@@ -22,6 +21,5 @@ public class FileUtils {
         } else {
             return inputStream;
         }
-
     }
 }

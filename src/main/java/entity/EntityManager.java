@@ -1,6 +1,12 @@
 package entity;
 
+import geometry.Vertex;
+
+import java.io.IOException;
 import java.util.List;
+
+import static model.Model.PROJECTILE_MODEL_FILEPATH;
+import static model.Model.createModelFrom;
 
 public class EntityManager {
 
@@ -19,10 +25,20 @@ public class EntityManager {
     }
 
     public Player getPlayer() {
-        return (Player) entities.
-                stream()
+        return (Player) entities
+                .stream()
                 .filter(entity -> entity.getClass() == Player.class)
                 .findFirst()
                 .orElseThrow(() -> new IllegalStateException("Player is not instantiated"));
+    }
+
+    public static Projectile createProjectile(Vertex shooterPosition, int shooterWidth, double force, float angle) {
+        try {
+            return new Projectile(createModelFrom(PROJECTILE_MODEL_FILEPATH), shooterPosition, shooterWidth, force, angle);
+        } catch (IOException e) {
+            System.err.println("Error while loading model for Projectile entity");
+            e.printStackTrace();
+        }
+        return null;
     }
 }

@@ -31,8 +31,8 @@ public class Player extends Entity {
         rocketLauncher.charge();
     }
 
-    public void shoot() {
-        // TODO: Implement me!
+    public Entity shoot() {
+        return rocketLauncher.shoot();
     }
 
     public void rotate(float angle) {
@@ -58,15 +58,15 @@ public class Player extends Entity {
 
     @Override
     public void render() {
-        final float modelXCenter = super.getModel().getNumberOfColumns() / 2.0f;
-        final float modelYCenter = -super.getModel().getNumberOfLines() / 2.0f;
-        final Vertex playerModelRotationPosition = new Vertex(modelXCenter, modelYCenter);
+        final float modelXCenter = getModel().getNumberOfColumns() / 2.0f;
+        final float modelYCenter = - getModel().getNumberOfLines() / 2.0f;
+        final Vertex modelRotationPosition = new Vertex(modelXCenter, modelYCenter);
 
         rocketLauncher.render();
         drawRigidBody(
                 super.getModel(),
                 super.getPosition(),
-                playerModelRotationPosition,
+                modelRotationPosition,
                 rotationAngle
         );
     }
