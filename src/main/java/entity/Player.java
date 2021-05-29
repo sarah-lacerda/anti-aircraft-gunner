@@ -3,6 +3,8 @@ package entity;
 import geometry.Vertex;
 import model.Model;
 
+import static geometry.configuration.World.X_LOWER_BOUND;
+import static geometry.configuration.World.X_UPPER_BOUND;
 import static render.Renderer.drawRigidBody;
 
 public class Player extends Entity {
@@ -46,14 +48,17 @@ public class Player extends Entity {
 
     @Override
     public void setPosition(float x, float y) {
-        super.setPosition(x, y);
-        rocketLauncher.setPlayerPosition(new Vertex(x, y));
+        final Vertex position = new Vertex(x, y);
+        setPosition(position);
+        rocketLauncher.setPlayerPosition(position);
     }
 
     @Override
     public void setPosition(Vertex position) {
-        super.setPosition(position);
-        rocketLauncher.setPlayerPosition(position);
+        if (isPositionValid(position)) {
+            super.setPosition(position);
+            rocketLauncher.setPlayerPosition(position);
+        }
     }
 
     @Override
@@ -69,5 +74,9 @@ public class Player extends Entity {
                 modelRotationPosition,
                 rotationAngle
         );
+    }
+
+    private boolean isPositionValid(Vertex position) {
+        return position.getX() > X_LOWER_BOUND && position.getX() < X_UPPER_BOUND - getModel().getWidth();
     }
 }
