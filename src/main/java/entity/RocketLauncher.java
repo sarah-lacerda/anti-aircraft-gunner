@@ -18,9 +18,9 @@ public class RocketLauncher extends Entity {
     private float rotationAngle;
     private float launcherStrength;
 
-    private final static float LAUNCHER_SECONDS_UNTIL_FULL = 2.00f;
-    private final static float LAUNCHER_MIN_POWER = 1.0f;
-    private final static float LAUNCHER_MAX_POWER = 8.00f;
+    private final static float LAUNCHER_SECONDS_UNTIL_FULL = 1.5f;
+    private final static float LAUNCHER_MIN_POWER_TO_SHOOT = 15f;
+    private final static float LAUNCHER_MAX_POWER = 60f;
     private final static float LAUNCHER_CHARGE_RATE =
             LAUNCHER_MAX_POWER / (LAUNCHER_SECONDS_UNTIL_FULL * FRAMES_PER_SECOND);
 
@@ -51,7 +51,7 @@ public class RocketLauncher extends Entity {
     }
 
     public Projectile shoot() {
-        if (launcherStrength >= LAUNCHER_MIN_POWER) {
+        if (launcherStrength >= LAUNCHER_MIN_POWER_TO_SHOOT) {
             return createProjectile(playerPosition, playerDimension, launcherStrength, rotationAngle);
         }
         return null;
@@ -95,11 +95,11 @@ public class RocketLauncher extends Entity {
     }
 
     private Vertex scalePosition(float launcherXCenter) {
-        return new Vertex(launcherXCenter, - model.getHeight());
+        return new Vertex(launcherXCenter, -model.getHeight());
     }
 
     private Vertex rotationPosition(float launcherXCenter, float playerYCenter) {
-        final float launcherRotationY = - model.getHeight() + playerYCenter;
+        final float launcherRotationY = -model.getHeight() + playerYCenter;
         return new Vertex(launcherXCenter, launcherRotationY);
     }
 

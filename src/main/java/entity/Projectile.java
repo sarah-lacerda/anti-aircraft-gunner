@@ -4,7 +4,11 @@ import geometry.Dimension;
 import geometry.Vertex;
 import model.Model;
 
-import static java.lang.Math.*;
+import static geometry.configuration.World.GRAVITY_ACCELERATION;
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
+import static java.lang.Math.toRadians;
+import static physics.Motion.linearMotion;
 import static render.Renderer.drawRigidBody;
 import static util.Time.deltaTimeInSecondsFrom;
 import static util.Time.getCurrentTimeInSeconds;
@@ -34,7 +38,10 @@ public class Projectile extends Entity {
     @Override
     public Vertex getPosition() {
         final float deltaTime = (float) deltaTimeInSecondsFrom(initialTime);
-        return new Vertex(initialPosition.getX() + (deltaTime * forceX), initialPosition.getY() + (deltaTime * forceY));
+        return new Vertex(
+                initialPosition.getX() + (deltaTime * forceX),
+                linearMotion(initialPosition.getY(), forceY, deltaTime, -GRAVITY_ACCELERATION)
+        );
     }
 
     @Override
@@ -69,6 +76,6 @@ public class Projectile extends Entity {
     }
 
     private Vertex rotationPosition(float projectileYCenter, int shooterHeight) {
-        return new Vertex(projectileYCenter, - shooterHeight);
+        return new Vertex(projectileYCenter, -shooterHeight);
     }
 }

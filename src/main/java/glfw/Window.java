@@ -9,7 +9,7 @@ import util.Color;
 
 import java.util.Objects;
 
-import static geometry.configuration.CoordinatePlane.setCoordinatePlane;
+import static geometry.configuration.World.setCoordinatePlane;
 import static glfw.Actions.handleActions;
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.GLFW_CONTEXT_VERSION_MAJOR;

@@ -3,7 +3,7 @@ package entity;
 import geometry.Vertex;
 import model.Model;
 
-import static geometry.configuration.CoordinatePlane.PLANE_WIDTH;
+import static geometry.configuration.World.PLANE_WIDTH;
 import static render.Renderer.FRAMES_PER_SECOND;
 import static render.Renderer.drawRigidBody;
 

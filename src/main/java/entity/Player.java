@@ -59,7 +59,7 @@ public class Player extends Entity {
     @Override
     public void render() {
         final float modelXCenter = getModel().getWidth() / 2.0f;
-        final float modelYCenter = - getModel().getHeight() / 2.0f;
+        final float modelYCenter = -getModel().getHeight() / 2.0f;
         final Vertex modelRotationPosition = new Vertex(modelXCenter, modelYCenter);
 
         rocketLauncher.render();
