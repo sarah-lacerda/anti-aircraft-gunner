@@ -86,7 +86,7 @@ public class Renderer {
 
         scale(scalePosition, xScaleFactor, yScaleFactor);
 
-        for (int cellId = 1; cellId <= matrixRepresentation.length; cellId++) {
+        for (int cellId = 0; cellId < matrixRepresentation.length; cellId++) {
             drawCell(getColorForCell(cellId, matrixRepresentation, staticColor));
             glTranslatef(1, 0, 0);
             if (isLastCellForCurrentLine(numberOfColumnsForMatrix, cellId)) {
@@ -129,11 +129,11 @@ public class Renderer {
     }
 
     private static boolean isLastCellForCurrentLine(int columns, int cellId) {
-        return cellId % columns == 0;
+        return (cellId + 1) % columns == 0;
     }
 
-    private static Color getColorForCell(int i, String[] matrix, Color overrideColor) {
-        Color color = from(matrix[i - 1]);
+    private static Color getColorForCell(int index, String[] matrix, Color overrideColor) {
+        Color color = from(matrix[index]);
         if (overrideColor != null && !color.equals(BLANK)) {
             return overrideColor;
         }
