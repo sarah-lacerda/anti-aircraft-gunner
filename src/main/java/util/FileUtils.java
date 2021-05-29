@@ -17,7 +17,7 @@ public class FileUtils {
         InputStream inputStream = FileUtils.class.getClassLoader().getResourceAsStream(filePath);
 
         if (inputStream == null) {
-            throw new IllegalArgumentException("File not found! " + filePath);
+            throw new IllegalArgumentException("Error while accessing resource, file not found! " + filePath);
         } else {
             return inputStream;
         }
