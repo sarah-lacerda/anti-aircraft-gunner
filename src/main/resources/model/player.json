@@ -6,9 +6,8 @@
     "BLANK", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "BLANK",
     "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive",
     "BLANK", "BLANK", "olive", "olive", "olive", "BLANK", "olive", "BLANK", "olive", "olive", "olive", "BLANK", "BLANK",
-    "BLANK", "BLANK", "BLANK", "olive", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "olive", "BLANK" , "BLANK", "BLANK",
-    "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK" , "BLANK", "BLANK"
+    "BLANK", "BLANK", "BLANK", "olive", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "olive", "BLANK" , "BLANK", "BLANK"
   ],
   "columns": 13,
-  "lines": 8
+  "lines": 7
 }
