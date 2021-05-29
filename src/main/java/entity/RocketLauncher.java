@@ -4,8 +4,10 @@ import geometry.Vertex;
 import model.Model;
 import util.Color;
 
+import static entity.EntityManager.createProjectile;
 import static render.Renderer.FRAMES_PER_SECOND;
 import static render.Renderer.drawRigidBody;
+import static util.Color.MAROON;
 
 public class RocketLauncher extends Entity {
 
@@ -60,29 +62,18 @@ public class RocketLauncher extends Entity {
         final float xScaleFactor = 1;
         final float yScaleFactor = launcherStrength / (LAUNCHER_MAX_POWER / 2.0f);
 
-        if (launcherStrength >= LAUNCHER_MAX_POWER) {
-            drawRigidBody(
-                    model,
-                    position(),
-                    scalePosition(launcherXCenter),
-                    xScaleFactor,
-                    yScaleFactor,
-                    rotationPosition(launcherXCenter, playerYCenter),
-                    rotationAngle,
-                    Color.MAROON
-            );
-        } else {
-            drawRigidBody(
-                    model,
-                    position(),
-                    scalePosition(launcherXCenter),
-                    xScaleFactor,
-                    yScaleFactor,
-                    rotationPosition(launcherXCenter, playerYCenter),
-                    rotationAngle
-            );
-        }
+        final Color colorOverride = launcherStrength >= LAUNCHER_MAX_POWER ? MAROON : null;
 
+        drawRigidBody(
+                model,
+                position(),
+                scalePosition(launcherXCenter),
+                xScaleFactor,
+                yScaleFactor,
+                rotationPosition(launcherXCenter, playerYCenter),
+                rotationAngle,
+                colorOverride
+        );
     }
 
     @Override
