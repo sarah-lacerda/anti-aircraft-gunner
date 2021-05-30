@@ -5,7 +5,7 @@ import geometry.Dimension;
 
 import java.io.IOException;
 
-import static java.lang.String.*;
+import static java.lang.String.format;
 import static util.FileUtils.deserializeFrom;
 
 public class Model {
@@ -15,6 +15,8 @@ public class Model {
     public static final String PLAYER_MODEL_FILE_PATH = "model/player.json";
     public static final String ROCKET_LAUNCHER_MODEL_FILE_PATH = "model/rocketLauncher.json";
     public static final String PROJECTILE_MODEL_FILEPATH = "model/projectile.json";
+    public static final String ENEMY_PLANE_1_FILE_PATH = "model/plane1.json";
+    public static final String[] ENEMY_PLANES = new String[]{ENEMY_PLANE_1_FILE_PATH};
 
     public Model(
             @JsonProperty(required = true, value = "matrixWithColors") String[] matrixWithColors,

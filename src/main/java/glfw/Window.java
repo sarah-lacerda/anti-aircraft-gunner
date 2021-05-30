@@ -137,8 +137,8 @@ public class Window {
 
             if (canRender(elapsedTimeSinceLastRendering)) {
                 render();
-                elapsedTimeSinceLastRendering = 0;
                 handleActions(entityManager);
+                elapsedTimeSinceLastRendering = 0;
             }
             glfwPollEvents();
         }

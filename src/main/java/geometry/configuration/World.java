@@ -7,8 +7,8 @@ public class World {
     public static final int X_UPPER_BOUND = 100;
     public static final int Y_LOWER_BOUND = -100;
     public static final int Y_UPPER_BOUND = 100;
-    public static final int PLANE_WIDTH = Math.abs(X_LOWER_BOUND) + Math.abs(X_UPPER_BOUND);
-    public static final int PLANE_HEIGHT = Math.abs(Y_LOWER_BOUND) + Math.abs(X_UPPER_BOUND);
+    public static final int WORLD_WIDTH = Math.abs(X_LOWER_BOUND) + Math.abs(X_UPPER_BOUND);
+    public static final int WORLD_HEIGHT = Math.abs(Y_LOWER_BOUND) + Math.abs(Y_UPPER_BOUND);
 
     public static final float GRAVITY_ACCELERATION = 10f;
 

@@ -28,7 +28,7 @@ public enum Color {
 
     public static Color from(String colorName) {
         return stream(Color.values())
-                .filter(color -> color.name().toLowerCase().contains(colorName.toLowerCase()))
+                .filter(color -> colorName.toLowerCase().contains(color.name().toLowerCase()))
                 .findFirst()
                 .orElse(null);
     }

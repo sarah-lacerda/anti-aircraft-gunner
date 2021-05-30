@@ -5,9 +5,12 @@ import geometry.Vertex;
 import model.Model;
 
 import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 import static geometry.configuration.World.X_LOWER_BOUND;
 import static geometry.configuration.World.Y_LOWER_BOUND;
+import static model.Model.ENEMY_PLANES;
 import static model.Model.PLAYER_MODEL_FILE_PATH;
 import static model.Model.PROJECTILE_MODEL_FILEPATH;
 import static model.Model.ROCKET_LAUNCHER_MODEL_FILE_PATH;
@@ -37,6 +40,18 @@ public class EntityManager {
                 .filter(entity -> entity.getClass() == Player.class)
                 .findFirst()
                 .orElseThrow(() -> new IllegalStateException("Player is not instantiated"));
+    }
+
+    public List<Entity> getPlanes() {
+        return entities
+                .stream()
+                .filter(entity -> entity.getClass() == Plane.class)
+                .collect(Collectors.toList());
+    }
+
+    public static Plane spawnEnemyPlane() {
+        final Model randomModel = createModelFrom(ENEMY_PLANES[new Random().nextInt(ENEMY_PLANES.length)]);
+        return new Plane(randomModel);
     }
 
     public static Player createPlayer() {

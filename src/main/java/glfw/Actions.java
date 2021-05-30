@@ -6,12 +6,22 @@ import geometry.Vertex;
 import glfw.listener.KeyListener;
 
 import static entity.Entity.UNIT_OF_MOVEMENT_PER_FRAME;
-import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_DOWN;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_SHIFT;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_SPACE;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_UP;
 
 public class Actions {
 
     public static void handleActions(EntityManager entityManager) {
+        handleEnemyMovement(entityManager);
         handleMainCharacterMovement(entityManager);
+    }
+
+    private static void handleEnemyMovement(EntityManager entityManager) {
+        entityManager.getPlanes().forEach(plane -> plane.setPosition(moveRightFrom(plane.getPosition())));
     }
 
     private static void handleMainCharacterMovement(EntityManager entityManager) {

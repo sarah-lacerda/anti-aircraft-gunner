@@ -1,0 +1,19 @@
+{
+  "matrixWithColors": [
+    "red__", "red__", "red__", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK",
+    "BLANK", "red__", "red__", "red__", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK",
+    "BLANK", "red__", "red__", "red__", "BLANK", "BLANK", "BLANK", "BLANK", "red__", "BLANK", "BLANK", "BLANK", "BLANK",
+    "BLANK", "red__", "red__", "red__", "BLANK", "BLANK", "BLANK", "red__", "gray_", "red__", "BLANK", "BLANK", "BLANK",
+    "BLANK", "red__", "red__", "red__", "red__", "red__", "red__", "red__", "gray_", "red__", "BLANK", "BLANK", "BLANK",
+    "BLANK", "red__", "red__", "red__", "red__", "red__", "red__", "red__", "silver", "red__", "red__", "BLANK", "BLANK",
+    "BLANK", "red__", "red__", "red__", "red__", "red__", "red__", "red__", "red__", "red__", "red__" , "black", "BLANK",
+    "BLANK", "BLANK", "BLANK", "red__", "red__", "red__", "red__", "red__", "red__", "red__", "red__" , "BLANK", "BLANK",
+    "BLANK", "BLANK", "BLANK", "red__", "red__", "red__", "red__", "red__", "red__", "red__", "BLANK" , "BLANK", "BLANK",
+    "BLANK", "BLANK", "red__", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK" , "BLANK", "BLANK",
+    "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK" , "BLANK", "BLANK",
+    "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK" , "BLANK", "BLANK",
+    "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK" , "BLANK", "BLANK"
+  ],
+  "columns": 13,
+  "lines": 13
+}
