@@ -42,11 +42,16 @@ public class EntityManager {
                 .orElseThrow(() -> new IllegalStateException("Player is not instantiated"));
     }
 
-    public List<Entity> getPlanes() {
+    public List<Plane> getPlanes() {
         return entities
                 .stream()
                 .filter(entity -> entity.getClass() == Plane.class)
+                .map(Plane.class::cast)
                 .collect(Collectors.toList());
+    }
+
+    public void removeDestroyedEntities() {
+        entities.removeIf(entity -> entity.getPositionY() < Y_LOWER_BOUND);
     }
 
     public static Plane spawnEnemyPlane() {

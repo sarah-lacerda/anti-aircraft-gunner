@@ -18,6 +18,7 @@ public class Actions {
     public static void handleActions(EntityManager entityManager) {
         handleEnemyMovement(entityManager);
         handleMainCharacterMovement(entityManager);
+        entityManager.removeDestroyedEntities();
     }
 
     private static void handleEnemyMovement(EntityManager entityManager) {
@@ -51,7 +52,7 @@ public class Actions {
         } else if (keyListener.isKeyPressed(GLFW_KEY_LEFT_SHIFT)) {
             player.chargeRocketLauncher();
         }
-        if (!KeyListener.getInstance().isKeyPressed(GLFW_KEY_LEFT_SHIFT)) {
+        if (!keyListener.isKeyPressed(GLFW_KEY_LEFT_SHIFT)) {
             player.unloadRocketLauncher();
         }
     }
