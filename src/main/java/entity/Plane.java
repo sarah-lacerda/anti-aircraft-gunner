@@ -8,9 +8,16 @@ import static geometry.configuration.World.WORLD_WIDTH;
 import static geometry.configuration.World.X_LOWER_BOUND;
 import static geometry.configuration.World.X_UPPER_BOUND;
 import static geometry.configuration.World.Y_UPPER_BOUND;
+import static render.Renderer.drawRigidBody;
 import static util.Randomizer.getSparseIntWithinRange;
 
 public class Plane extends Entity {
+
+    private boolean destroyed;
+    private float rotationAngle;
+
+    public static final int MINIMUM_X_SPAWN_POSITION = X_LOWER_BOUND - 100;
+    public static final int MAXIMUM_X_SPAWN_POSITION = X_LOWER_BOUND;
     public static final int MINIMUM_FLIGHT_LEVEL = 10;
     public static final int MINIMUM_X_DISTANCE_BETWEEN_PLANES = WORLD_WIDTH / 10;
     public static final int MINIMUM_Y_DISTANCE_BETWEEN_PLANES = WORLD_HEIGHT / 10;
@@ -18,29 +25,44 @@ public class Plane extends Entity {
 
     public Plane(Model model) {
         super(model, randomValidPosition());
+        destroyed = false;
+        rotationAngle = 0f;
+    }
+
+    public void destroy() {
+        destroyed = true;
     }
 
     @Override
     public void setPosition(float x, float y) {
-        if (isOutOfScreen(x)) {
-            super.setPosition(randomValidPosition());
-        } else {
-            super.setPosition(x, y);
-        }
+        setPosition(new Vertex(x, y));
     }
 
     @Override
     public void setPosition(Vertex position) {
-        if (isOutOfScreen(position.getX())) {
-            super.setPosition(randomValidPosition());
+        if (destroyed) {
+            fall(position);
         } else {
-            super.setPosition(position);
+            if (isOutOfScreen(position.getX())) {
+                super.setPosition(randomValidPosition());
+            } else {
+                super.setPosition(position);
+            }
         }
     }
 
-    public static Vertex randomValidPosition() {
-        final int x = getSparseIntWithinRange(X_LOWER_BOUND - 100,
-                X_LOWER_BOUND,
+    @Override
+    public void render() {
+        final float modelXCenter = getModel().getWidth() / 2.0f;
+        final float modelYCenter = -getModel().getHeight() / 2.0f;
+        final Vertex modelRotationPosition = new Vertex(modelXCenter, modelYCenter);
+
+        drawRigidBody(getModel(), getPosition(), modelRotationPosition, rotationAngle);
+    }
+
+    private static Vertex randomValidPosition() {
+        final int x = getSparseIntWithinRange(MINIMUM_X_SPAWN_POSITION,
+                MAXIMUM_X_SPAWN_POSITION,
                 MINIMUM_X_DISTANCE_BETWEEN_PLANES);
         final int y = randomValidYLevel();
         return new Vertex(x, y);
@@ -52,5 +74,10 @@ public class Plane extends Entity {
 
     private boolean isOutOfScreen(float positionX) {
         return positionX > X_UPPER_BOUND;
+    }
+
+    private void fall(Vertex position) {
+        rotationAngle -= 1;
+        super.setPosition(position.getX(), position.getY() - 1);
     }
 }
