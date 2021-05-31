@@ -3,7 +3,7 @@ package glfw;
 import entity.Destroyable;
 import entity.Entity;
 import entity.EntityManager;
-import entity.Plane;
+import entity.Airplane;
 import entity.Player;
 import entity.Projectile;
 import geometry.Vertex;
@@ -33,7 +33,7 @@ public class Actions {
     }
 
     private static void handleEnemyMovement(EntityManager entityManager) {
-        entityManager.getPlanes().forEach(plane -> plane.setPosition(moveRightFrom(plane.getPosition())));
+        entityManager.getPlanes().forEach(airplane -> airplane.setPosition(moveRightFrom(airplane.getPosition())));
     }
 
     private static void handleMainCharacterMovement(EntityManager entityManager) {
@@ -75,7 +75,7 @@ public class Actions {
                 final Entity entity2 = entityManager.getEntities().get(j);
                 if (collisionBetween(entity1, entity2)) {
                     if (collisionBetweenPlanes(entity1, entity2)) {
-                        removeAndCreateNewAirplane((Plane) entity1, entityManager);
+                        removeAndCreateNewAirplane((Airplane) entity1, entityManager);
                     } else {
                         registerCollisionBetween(entityManager.getEntities().get(i),
                                 entityManager.getEntities().get(j));
@@ -85,8 +85,8 @@ public class Actions {
         }
     }
 
-    private static void removeAndCreateNewAirplane(Plane plane, EntityManager entityManager) {
-        entityManager.remove(plane);
+    private static void removeAndCreateNewAirplane(Airplane airplane, EntityManager entityManager) {
+        entityManager.remove(airplane);
         entityManager.add(spawnEnemyPlane());
     }
 
@@ -104,10 +104,10 @@ public class Actions {
     }
 
     private static boolean collisionBetweenPlanes(Entity entity1, Entity entity2) {
-        return entity1.getClass() == Plane.class &&
-                entity2.getClass() == Plane.class &&
-                !((Plane) entity1).isDestroyed() &&
-                !((Plane) entity2).isDestroyed();
+        return entity1.getClass() == Airplane.class &&
+                entity2.getClass() == Airplane.class &&
+                !((Airplane) entity1).isDestroyed() &&
+                !((Airplane) entity2).isDestroyed();
     }
 
     private static Vertex moveLeftFrom(Vertex currentPosition) {

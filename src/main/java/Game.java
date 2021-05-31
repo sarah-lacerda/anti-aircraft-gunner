@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import static de.damios.guacamole.gdx.StartOnFirstThreadHelper.startNewJvmIfRequired;
 import static entity.Building.TOTAL_NUMBER_OF_BUILDINGS;
-import static entity.Plane.TOTAL_NUMBER_OF_ENEMY_PLANES;
+import static entity.Airplane.TOTAL_NUMBER_OF_ENEMY_PLANES;
 
 public class Game {
 

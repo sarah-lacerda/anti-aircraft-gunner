@@ -11,7 +11,7 @@ import static geometry.configuration.World.Y_UPPER_BOUND;
 import static render.Renderer.drawRigidBody;
 import static util.Randomizer.getSparseIntWithinRange;
 
-public class Plane extends Enemy {
+public class Airplane extends Enemy {
 
     private boolean destroyed;
     private float rotationAngle;
@@ -23,7 +23,7 @@ public class Plane extends Enemy {
     public static final int MINIMUM_Y_DISTANCE_BETWEEN_PLANES = WORLD_HEIGHT / 10;
     public static final int TOTAL_NUMBER_OF_ENEMY_PLANES = 10;
 
-    public Plane(Model model) {
+    public Airplane(Model model) {
         super(model, randomValidPosition());
         destroyed = false;
         rotationAngle = 0f;

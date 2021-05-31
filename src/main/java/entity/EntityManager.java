@@ -61,11 +61,11 @@ public class EntityManager {
                 .orElseThrow(() -> new IllegalStateException("Player is not instantiated"));
     }
 
-    public List<Plane> getPlanes() {
+    public List<Airplane> getPlanes() {
         return entities
                 .stream()
-                .filter(entity -> entity.getClass() == Plane.class)
-                .map(Plane.class::cast)
+                .filter(entity -> entity.getClass() == Airplane.class)
+                .map(Airplane.class::cast)
                 .collect(Collectors.toList());
     }
 
@@ -73,9 +73,9 @@ public class EntityManager {
         entities.removeIf(entity -> entity.getPositionY() < Y_LOWER_BOUND);
     }
 
-    public static Plane spawnEnemyPlane() {
+    public static Airplane spawnEnemyPlane() {
         final Model randomModel = createModelFrom(ENEMY_PLANES[new Random().nextInt(ENEMY_PLANES.length)]);
-        return new Plane(randomModel);
+        return new Airplane(randomModel);
     }
 
     public static Projectile createProjectile(Vertex shooterPosition,
