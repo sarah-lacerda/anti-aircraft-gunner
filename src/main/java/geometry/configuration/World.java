@@ -10,7 +10,7 @@ public class World {
     public static final int WORLD_WIDTH = Math.abs(X_LOWER_BOUND) + Math.abs(X_UPPER_BOUND);
     public static final int WORLD_HEIGHT = Math.abs(Y_LOWER_BOUND) + Math.abs(Y_UPPER_BOUND);
 
-    public static final float GRAVITY_ACCELERATION = 10f;
+    public static final float GRAVITY_ACCELERATION = 9.8f;
 
     private World() {}
 
