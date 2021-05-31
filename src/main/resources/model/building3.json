@@ -14,14 +14,6 @@
     "white", "black", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta","black","white",
     "white", "black", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta","black","white",
     "white", "black", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta","black","white",
-    "white", "black", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta","black","white",
-    "white", "black", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta","black","white",
-    "white", "black", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta","black","white",
-    "white", "black", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta","black","white",
-    "white", "black", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta","black","white",
-    "white", "black", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta","black","white",
-    "white", "black", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta","black","white",
-    "white", "black", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta", "magenta","black","white",
     "white", "black", "magenta", "magenta", "magenta", "black", "black", "black", "magenta", "magenta", "magenta", "magenta","black","white",
     "white", "black", "magenta", "magenta", "magenta", "maroon", "maroon", "black", "magenta", "magenta", "magenta", "magenta","black","white",
     "white", "black", "magenta", "magenta", "magenta", "maroon", "maroon", "black", "magenta", "magenta", "magenta", "magenta","black","white",
@@ -30,5 +22,5 @@
     "white", "black", "magenta", "magenta", "magenta", "maroon", "maroon", "black", "magenta", "magenta", "magenta", "magenta","black","white"
   ],
   "columns": 14,
-  "lines": 29
+  "lines": 22
 }
