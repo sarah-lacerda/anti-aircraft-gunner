@@ -63,6 +63,14 @@ public class EntityManager {
                 .orElseThrow(() -> new IllegalStateException("Player is not instantiated"));
     }
 
+    public List<Building> getBuildings() {
+        return entities
+                .stream()
+                .filter(entity -> entity.getClass() == Building.class)
+                .map(Building.class::cast)
+                .collect(Collectors.toList());
+    }
+
     public List<Airplane> getAirplanes() {
         return entities
                 .stream()

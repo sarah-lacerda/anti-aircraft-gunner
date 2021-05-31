@@ -9,7 +9,7 @@ import static geometry.configuration.World.X_UPPER_BOUND;
 import static geometry.configuration.World.Y_LOWER_BOUND;
 import static util.Randomizer.randomIntWithinRange;
 
-public class Building extends Friendly{
+public class Building extends Friendly {
     private boolean destroyed;
 
     private static final int MINIMUM_X_SPAWN_POSITION = X_LOWER_BOUND + 15;
@@ -21,6 +21,14 @@ public class Building extends Friendly{
         super(model, null);
         destroyed = false;
         setPosition(randomValidPosition());
+    }
+
+    public void fall() {
+        setPosition(getPositionX(), getPositionY() - 1);
+    }
+
+    public boolean isDestroyed() {
+        return destroyed;
     }
 
     @Override

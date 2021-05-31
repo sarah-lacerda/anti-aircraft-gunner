@@ -1,6 +1,7 @@
 package glfw;
 
 import entity.Airplane;
+import entity.Building;
 import entity.Destroyable;
 import entity.Entity;
 import entity.EntityManager;
@@ -32,8 +33,13 @@ public class Actions {
         handleEnemyMovement(entityManager);
         handleEnemyShooting(entityManager);
         handleMainCharacterMovement(entityManager);
+        handleBuildingDestruction(entityManager);
         handleCollisions(entityManager);
         entityManager.removeDestroyedEntities();
+    }
+
+    private static void handleBuildingDestruction(EntityManager entityManager) {
+        entityManager.getBuildings().stream().filter(Building::isDestroyed).forEach(Building::fall);
     }
 
     private static void handleEnemyShooting(EntityManager entityManager) {
