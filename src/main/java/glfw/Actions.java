@@ -111,7 +111,10 @@ public class Actions {
     }
 
     private static boolean collisionBetweenPlanes(Entity entity1, Entity entity2) {
-        return entity1.getClass() == Plane.class && entity2.getClass() == Plane.class;
+        return entity1.getClass() == Plane.class &&
+                entity2.getClass() == Plane.class &&
+                !((Plane) entity1).isDestroyed() &&
+                !((Plane) entity2).isDestroyed();
     }
 
     private static Vertex moveLeftFrom(Vertex currentPosition) {

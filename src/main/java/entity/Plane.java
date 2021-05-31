@@ -29,6 +29,10 @@ public class Plane extends Enemy {
         rotationAngle = 0f;
     }
 
+    public boolean isDestroyed() {
+        return destroyed;
+    }
+
     @Override
     public void setPosition(float x, float y) {
         setPosition(new Vertex(x, y));
