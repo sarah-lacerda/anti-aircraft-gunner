@@ -15,6 +15,7 @@ import static geometry.configuration.World.Y_LOWER_BOUND;
 import static java.util.stream.IntStream.range;
 import static model.Model.BUILDINGS;
 import static model.Model.ENEMY_PLANES;
+import static model.Model.ENEMY_PROJECTILE_MODEL_FILEPATH;
 import static model.Model.PLAYER_MODEL_FILE_PATH;
 import static model.Model.PROJECTILE_MODEL_FILEPATH;
 import static model.Model.ROCKET_LAUNCHER_MODEL_FILE_PATH;
@@ -91,12 +92,10 @@ public class EntityManager {
                                               float force,
                                               float angle,
                                               boolean enemy) {
-        return new Projectile(createModelFrom(PROJECTILE_MODEL_FILEPATH),
-                shooterPosition,
-                shooterDimension,
-                force,
-                angle,
-                enemy);
+        final Model model = enemy ?
+                createModelFrom(ENEMY_PROJECTILE_MODEL_FILEPATH) : createModelFrom(PROJECTILE_MODEL_FILEPATH);
+
+        return new Projectile(model, shooterPosition, shooterDimension, force, angle, enemy);
     }
 
     private static Player createPlayer() {

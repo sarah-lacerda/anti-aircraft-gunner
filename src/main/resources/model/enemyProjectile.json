@@ -1,0 +1,9 @@
+{
+  "matrixWithColors": [
+    "silver", "gray", "silver",
+    "gray", "magenta", "gray",
+    "silver", "gray", "silver"
+  ],
+  "columns": 3,
+  "lines": 3
+}
