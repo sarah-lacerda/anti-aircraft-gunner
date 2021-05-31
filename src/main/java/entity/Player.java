@@ -7,7 +7,7 @@ import static geometry.configuration.World.X_LOWER_BOUND;
 import static geometry.configuration.World.X_UPPER_BOUND;
 import static render.Renderer.drawRigidBody;
 
-public class Player extends Entity {
+public class Player extends Friendly {
 
     private final RocketLauncher rocketLauncher;
     private float rotationAngle;
@@ -33,7 +33,7 @@ public class Player extends Entity {
         rocketLauncher.charge();
     }
 
-    public Entity shoot() {
+    public Projectile shoot() {
         return rocketLauncher.shoot();
     }
 
@@ -44,6 +44,11 @@ public class Player extends Entity {
             this.rotationAngle = Math.min(this.rotationAngle + angle, MAX_ANGLE_ROTATION);
         }
         rocketLauncher.setRotationAngle(this.rotationAngle);
+    }
+
+    @Override
+    public void hit() {
+        // TODO: Implement me!
     }
 
     @Override
@@ -63,20 +68,20 @@ public class Player extends Entity {
 
     @Override
     public void render() {
-        final float modelXCenter = getModel().getWidth() / 2.0f;
-        final float modelYCenter = -getModel().getHeight() / 2.0f;
+        final float modelXCenter = getDimension().getWidth() / 2.0f;
+        final float modelYCenter = -getDimension().getHeight() / 2.0f;
         final Vertex modelRotationPosition = new Vertex(modelXCenter, modelYCenter);
 
         rocketLauncher.render();
         drawRigidBody(
-                super.getModel(),
-                super.getPosition(),
+                getModel(),
+                getPosition(),
                 modelRotationPosition,
                 rotationAngle
         );
     }
 
     private boolean isPositionValid(Vertex position) {
-        return position.getX() > X_LOWER_BOUND && position.getX() < X_UPPER_BOUND - getModel().getWidth();
+        return position.getX() > X_LOWER_BOUND && position.getX() < X_UPPER_BOUND - getDimension().getWidth();
     }
 }

@@ -30,6 +30,14 @@ public class EntityManager {
         }
     }
 
+    public void remove(Entity entity) {
+        entities.remove(entity);
+    }
+
+    public List<Entity> getEntities() {
+        return entities;
+    }
+
     public void renderEntities() {
         entities.forEach(Entity::render);
     }
@@ -72,11 +80,13 @@ public class EntityManager {
     public static Projectile createProjectile(Vertex shooterPosition,
                                               Dimension shooterDimension,
                                               float force,
-                                              float angle) {
+                                              float angle,
+                                              boolean enemy) {
         return new Projectile(createModelFrom(PROJECTILE_MODEL_FILEPATH),
                 shooterPosition,
                 shooterDimension,
                 force,
-                angle);
+                angle,
+                enemy);
     }
 }

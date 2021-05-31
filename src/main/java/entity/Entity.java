@@ -1,5 +1,6 @@
 package entity;
 
+import geometry.Dimension;
 import geometry.Vertex;
 import model.Model;
 
@@ -49,6 +50,10 @@ public class Entity {
 
     public void setPosition(Vertex position) {
         this.position = position;
+    }
+
+    public Dimension getDimension() {
+        return model.getDimension();
     }
 
     protected Model getModel() {

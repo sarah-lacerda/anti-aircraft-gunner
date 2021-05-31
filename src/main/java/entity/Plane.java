@@ -11,7 +11,7 @@ import static geometry.configuration.World.Y_UPPER_BOUND;
 import static render.Renderer.drawRigidBody;
 import static util.Randomizer.getSparseIntWithinRange;
 
-public class Plane extends Entity {
+public class Plane extends Enemy {
 
     private boolean destroyed;
     private float rotationAngle;
@@ -27,10 +27,6 @@ public class Plane extends Entity {
         super(model, randomValidPosition());
         destroyed = false;
         rotationAngle = 0f;
-    }
-
-    public void destroy() {
-        destroyed = true;
     }
 
     @Override
@@ -53,11 +49,16 @@ public class Plane extends Entity {
 
     @Override
     public void render() {
-        final float modelXCenter = getModel().getWidth() / 2.0f;
-        final float modelYCenter = -getModel().getHeight() / 2.0f;
+        final float modelXCenter = getDimension().getWidth() / 2.0f;
+        final float modelYCenter = -getDimension().getHeight() / 2.0f;
         final Vertex modelRotationPosition = new Vertex(modelXCenter, modelYCenter);
 
         drawRigidBody(getModel(), getPosition(), modelRotationPosition, rotationAngle);
+    }
+
+    @Override
+    public void hit() {
+        destroyed = true;
     }
 
     private static Vertex randomValidPosition() {

@@ -52,7 +52,7 @@ public class RocketLauncher extends Entity {
 
     public Projectile shoot() {
         if (launcherStrength >= LAUNCHER_MIN_POWER_TO_SHOOT) {
-            return createProjectile(playerPosition, playerDimension, launcherStrength, rotationAngle);
+            return createProjectile(playerPosition, playerDimension, launcherStrength, rotationAngle, false);
         }
         return null;
     }

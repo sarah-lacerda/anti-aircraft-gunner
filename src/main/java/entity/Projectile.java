@@ -21,8 +21,14 @@ public class Projectile extends Entity {
     private final float forceX;
     private final float forceY;
     private final float angle;
+    private final boolean enemy;
 
-    public Projectile(Model model, Vertex shooterPosition, Dimension shooterDimension, float force, float angle) {
+    public Projectile(Model model,
+                      Vertex shooterPosition,
+                      Dimension shooterDimension,
+                      float force,
+                      float angle,
+                      boolean enemy) {
         super(model, initialPosition(model.getDimension(), shooterPosition, shooterDimension));
 
         this.shooterDimension = shooterDimension;
@@ -33,6 +39,11 @@ public class Projectile extends Entity {
         this.forceX = force * (float) -cos(angleFromOrigin);
         this.forceY = force * (float) sin(angleFromOrigin);
         this.angle = angle;
+        this.enemy = enemy;
+    }
+
+    public boolean isShotFromEnemy() {
+        return enemy;
     }
 
     @Override
@@ -56,7 +67,7 @@ public class Projectile extends Entity {
 
     @Override
     public void render() {
-        final float projectileYCenter = getModel().getWidth() / 2.0f;
+        final float projectileYCenter = getDimension().getWidth() / 2.0f;
 
         drawRigidBody(
                 getModel(),
