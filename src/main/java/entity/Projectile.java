@@ -77,6 +77,15 @@ public class Projectile extends Entity {
         );
     }
 
+    public static boolean isProjectile(Entity entity) {
+        return entity.getClass() == Projectile.class;
+    }
+
+    public static boolean canBeHitBy(Projectile projectile, Entity entity) {
+        return (projectile.isShotFromEnemy() && (entity instanceof Friendly)) ||
+                (!projectile.isShotFromEnemy() && (entity instanceof Enemy));
+    }
+
     private static Vertex initialPosition(Dimension projectileDimension,
                                           Vertex shooterPosition,
                                           Dimension shooterDimension) {

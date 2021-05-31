@@ -4,14 +4,17 @@ import geometry.Dimension;
 import geometry.Vertex;
 import model.Model;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import static geometry.Collision.collisionBetween;
 import static geometry.configuration.World.X_LOWER_BOUND;
 import static geometry.configuration.World.Y_LOWER_BOUND;
-import static model.Model.ENEMY_PLANES;
+import static java.util.stream.IntStream.range;
 import static model.Model.BUILDINGS;
+import static model.Model.ENEMY_PLANES;
 import static model.Model.PLAYER_MODEL_FILE_PATH;
 import static model.Model.PROJECTILE_MODEL_FILEPATH;
 import static model.Model.ROCKET_LAUNCHER_MODEL_FILE_PATH;
@@ -21,11 +24,17 @@ public class EntityManager {
 
     private final List<Entity> entities;
 
-    public EntityManager(List<Entity> entities) {
-        this.entities = entities;
+    public EntityManager() {
+        this.entities = new LinkedList<>();
     }
 
-    public void addEntity(Entity entity) {
+    public void initializeEntities(int quantityOfPlanes, int quantityOfBuildings) {
+        add(createPlayer());
+
+        initializeAirplanesAndBuildings(quantityOfPlanes, quantityOfBuildings);
+    }
+
+    public void add(Entity entity) {
         if (entity != null) {
             entities.add(entity);
         }
@@ -68,22 +77,6 @@ public class EntityManager {
         return new Plane(randomModel);
     }
 
-    public static Player createPlayer() {
-        final Model playerModel = createModelFrom(PLAYER_MODEL_FILE_PATH);
-        final Model rocketLauncherModel = createModelFrom(ROCKET_LAUNCHER_MODEL_FILE_PATH);
-        final Vertex initialPosition = new Vertex(
-                X_LOWER_BOUND + playerModel.getWidth(),
-                Y_LOWER_BOUND + playerModel.getHeight() + playerModel.getWidth() / 2f
-        );
-        return new Player(playerModel, rocketLauncherModel, initialPosition);
-    }
-
-    public static Building createBuilding() {
-        final Model Buildings = createModelFrom(BUILDINGS[new Random().nextInt(BUILDINGS.length)]);
-
-        return new Building(Buildings);
-    }
-
     public static Projectile createProjectile(Vertex shooterPosition,
                                               Dimension shooterDimension,
                                               float force,
@@ -95,5 +88,52 @@ public class EntityManager {
                 force,
                 angle,
                 enemy);
+    }
+
+    private static Player createPlayer() {
+        final Model playerModel = createModelFrom(PLAYER_MODEL_FILE_PATH);
+        final Model rocketLauncherModel = createModelFrom(ROCKET_LAUNCHER_MODEL_FILE_PATH);
+        final Vertex initialPosition = new Vertex(
+                X_LOWER_BOUND + 3,
+                Y_LOWER_BOUND + playerModel.getHeight() + playerModel.getWidth() / 2f
+        );
+        return new Player(playerModel, rocketLauncherModel, initialPosition);
+    }
+
+    private static Building createBuilding() {
+        final Model Buildings = createModelFrom(BUILDINGS[new Random().nextInt(BUILDINGS.length)]);
+
+        return new Building(Buildings);
+    }
+
+    private void initializeAirplanesAndBuildings(int quantityOfPlanes, int quantityOfBuildings) {
+        range(0, Math.max(quantityOfPlanes, quantityOfBuildings)).forEach(count -> {
+            if (shouldAddNewAirplane(count, quantityOfPlanes)) {
+                add(spawnEnemyPlane());
+            }
+            if (shouldAddNewBuilding(count, quantityOfBuildings)) {
+                spawnBuildingOnValidPosition();
+            }
+        });
+    }
+
+    private void spawnBuildingOnValidPosition() {
+        Building building;
+        do {
+            building = createBuilding();
+        } while (collidesWithOthers(building));
+        add(building);
+    }
+
+    private boolean collidesWithOthers(Entity entity) {
+        return entities.stream().anyMatch(other -> collisionBetween(entity, other));
+    }
+
+    private boolean shouldAddNewBuilding(int count, int quantityOfBuildings) {
+        return count < quantityOfBuildings;
+    }
+
+    private boolean shouldAddNewAirplane(int count, int quantityOfAirplanes) {
+        return count < quantityOfAirplanes;
     }
 }

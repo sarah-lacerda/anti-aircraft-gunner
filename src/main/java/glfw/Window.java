@@ -45,8 +45,8 @@ import static org.lwjgl.opengl.GL11.glClearColor;
 import static org.lwjgl.system.MemoryUtil.NULL;
 import static render.Renderer.canRender;
 import static util.Color.WHITE;
-import static util.Time.getCurrentTimeInSeconds;
 import static util.Time.deltaTimeInSecondsFrom;
+import static util.Time.getCurrentTimeInSeconds;
 
 public class Window {
     private int width;

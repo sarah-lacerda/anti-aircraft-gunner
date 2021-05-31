@@ -3,17 +3,24 @@ package entity;
 import geometry.Vertex;
 import model.Model;
 
-import static geometry.configuration.World.*;
-import static geometry.configuration.World.WORLD_HEIGHT;
-import static render.Renderer.drawRigidBody;
+import static geometry.configuration.World.WORLD_WIDTH;
+import static geometry.configuration.World.X_LOWER_BOUND;
+import static geometry.configuration.World.X_UPPER_BOUND;
+import static geometry.configuration.World.Y_LOWER_BOUND;
 import static util.Randomizer.getSparseIntWithinRange;
 
 public class Building extends Friendly{
     private boolean destroyed;
 
+    private static final int MINIMUM_X_SPAWN_POSITION = X_LOWER_BOUND + 15;
+    private static final int MAXIMUM_X_SPAWN_POSITION = X_UPPER_BOUND;
+    private static final int MINIMUM_DISTANCE_BETWEEN_BUILDINGS = WORLD_WIDTH / 5;
+    public static final int TOTAL_NUMBER_OF_BUILDINGS = 5;
+
     public Building(Model model) {
-        super(model, randomValidPosition());
+        super(model, null);
         destroyed = false;
+        setPosition(randomValidPosition());
     }
 
     @Override
@@ -21,17 +28,11 @@ public class Building extends Friendly{
         destroyed = true;
     }
 
-    public boolean isDestroyed() {
-        return destroyed;
-    }
-
-    private static Vertex randomValidPosition() {
-        final int x = getSparseIntWithinRange(0,
-                0,
-                0);
-        final int y = getSparseIntWithinRange(0,
-                0,
-                0);
+    private Vertex randomValidPosition() {
+        final int x = getSparseIntWithinRange(MINIMUM_X_SPAWN_POSITION,
+                MAXIMUM_X_SPAWN_POSITION,
+                MINIMUM_DISTANCE_BETWEEN_BUILDINGS);
+        final int y = Y_LOWER_BOUND + getModel().getHeight();
         return new Vertex(x, y);
     }
 }

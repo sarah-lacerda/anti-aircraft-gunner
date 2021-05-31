@@ -1,10 +1,8 @@
 package glfw;
 
 import entity.Destroyable;
-import entity.Enemy;
 import entity.Entity;
 import entity.EntityManager;
-import entity.Friendly;
 import entity.Plane;
 import entity.Player;
 import entity.Projectile;
@@ -13,6 +11,8 @@ import glfw.listener.KeyListener;
 
 import static entity.Entity.UNIT_OF_MOVEMENT_PER_FRAME;
 import static entity.EntityManager.spawnEnemyPlane;
+import static entity.Projectile.canBeHitBy;
+import static entity.Projectile.isProjectile;
 import static geometry.Collision.collisionBetween;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_DOWN;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT;
@@ -55,7 +55,7 @@ public class Actions {
         if (keyListener.isKeyPressed(GLFW_KEY_LEFT_SHIFT) &&
                 KeyListener.getInstance().isKeyPressed(GLFW_KEY_SPACE)) {
 
-            entityManager.addEntity(player.shoot());
+            entityManager.add(player.shoot());
             player.unloadRocketLauncher();
 
         } else if (keyListener.isKeyPressed(GLFW_KEY_LEFT_SHIFT)) {
@@ -73,18 +73,19 @@ public class Actions {
                 final Entity entity2 = entityManager.getEntities().get(j);
                 if (collisionBetween(entity1, entity2)) {
                     if (collisionBetweenPlanes(entity1, entity2)) {
-                        removeAndCreateNewOne(entityManager, entity1);
+                        removeAndCreateNewAirplane((Plane) entity1, entityManager);
                     } else {
-                        registerCollisionBetween(entityManager.getEntities().get(i), entityManager.getEntities().get(j));
+                        registerCollisionBetween(entityManager.getEntities().get(i),
+                                entityManager.getEntities().get(j));
                     }
                 }
             }
         }
     }
 
-    private static void removeAndCreateNewOne(EntityManager entityManager, Entity entity) {
-        entityManager.remove(entity);
-        entityManager.addEntity(spawnEnemyPlane());
+    private static void removeAndCreateNewAirplane(Plane plane, EntityManager entityManager) {
+        entityManager.remove(plane);
+        entityManager.add(spawnEnemyPlane());
     }
 
     private static void registerCollisionBetween(Entity entity1, Entity entity2) {
@@ -98,16 +99,6 @@ public class Actions {
                 ((Destroyable) entity1).hit();
             }
         }
-    }
-
-    private static boolean canBeHitBy(Projectile projectile, Entity entity) {
-        return (projectile.isShotFromEnemy() && (entity instanceof Friendly)) ||
-                (!projectile.isShotFromEnemy() && (entity instanceof Enemy));
-    }
-
-
-    private static boolean isProjectile(Entity entity) {
-        return entity.getClass() == Projectile.class;
     }
 
     private static boolean collisionBetweenPlanes(Entity entity1, Entity entity2) {
