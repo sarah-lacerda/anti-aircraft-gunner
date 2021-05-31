@@ -49,7 +49,8 @@ public class EntityManager {
     }
 
     public void renderEntities() {
-        entities.forEach(Entity::render);
+        entities.stream().filter(entity -> entity.getClass() != Player.class).forEach(Entity::render);
+        getPlayer().render();
     }
 
     public Player getPlayer() {
