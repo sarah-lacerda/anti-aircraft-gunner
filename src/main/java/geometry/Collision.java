@@ -4,6 +4,8 @@ import entity.Entity;
 
 public class Collision {
 
+    private Collision() {}
+
     public static boolean collisionBetween(Entity entity1, Entity entity2) {
         final Vertex entity1Center = new Vertex(
                 entity1.getPositionX() + (entity1.getDimension().getWidth() / 2f),

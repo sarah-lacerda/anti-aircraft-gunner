@@ -9,6 +9,8 @@ public class FileUtils {
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
+    private FileUtils() {}
+
     public static <T> T deserializeFrom(String filePath, Class<T> targetClass) throws IOException {
         return OBJECT_MAPPER.readValue(getFileFromResourceAsStream(filePath), targetClass);
     }

@@ -12,6 +12,8 @@ public class World {
 
     public static final float GRAVITY_ACCELERATION = 10f;
 
+    private World() {}
+
     public static void setCoordinatePlane() {
         glOrtho(X_LOWER_BOUND, X_UPPER_BOUND, Y_LOWER_BOUND, Y_UPPER_BOUND, 0, 1);
     }

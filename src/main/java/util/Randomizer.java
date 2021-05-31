@@ -5,6 +5,8 @@ import java.util.Random;
 public class Randomizer {
     private final static Random RANDOM = new Random();
 
+    private Randomizer() {}
+
     public static int getSparseIntWithinRange(int min, int max, int sparseUnit) {
         if (max < min) {
             throw new IllegalArgumentException("min cannot be greater than max!");

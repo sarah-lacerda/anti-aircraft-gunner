@@ -23,6 +23,8 @@ import static org.lwjgl.glfw.GLFW.GLFW_KEY_UP;
 
 public class Actions {
 
+    private Actions() {}
+
     public static void handleActions(EntityManager entityManager) {
         handleEnemyMovement(entityManager);
         handleMainCharacterMovement(entityManager);
