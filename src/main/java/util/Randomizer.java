@@ -7,7 +7,7 @@ public class Randomizer {
 
     private Randomizer() {}
 
-    public static int getSparseIntWithinRange(int min, int max, int sparseUnit) {
+    public static int randomIntWithinRange(int min, int max, int sparseUnit) {
         if (max < min) {
             throw new IllegalArgumentException("min cannot be greater than max!");
         }
@@ -17,5 +17,9 @@ public class Randomizer {
             number = RANDOM.nextInt((max - min) + 1) + min;
         } while (sparseUnit != 0 && number % sparseUnit != 0);
         return number;
+    }
+
+    public static boolean randomBoolean(double probability) {
+        return Math.random() < probability;
     }
 }

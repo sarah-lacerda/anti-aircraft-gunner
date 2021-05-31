@@ -7,7 +7,7 @@ import static geometry.configuration.World.WORLD_WIDTH;
 import static geometry.configuration.World.X_LOWER_BOUND;
 import static geometry.configuration.World.X_UPPER_BOUND;
 import static geometry.configuration.World.Y_LOWER_BOUND;
-import static util.Randomizer.getSparseIntWithinRange;
+import static util.Randomizer.randomIntWithinRange;
 
 public class Building extends Friendly{
     private boolean destroyed;
@@ -29,7 +29,7 @@ public class Building extends Friendly{
     }
 
     private Vertex randomValidPosition() {
-        final int x = getSparseIntWithinRange(MINIMUM_X_SPAWN_POSITION,
+        final int x = randomIntWithinRange(MINIMUM_X_SPAWN_POSITION,
                 MAXIMUM_X_SPAWN_POSITION,
                 MINIMUM_DISTANCE_BETWEEN_BUILDINGS);
         final int y = Y_LOWER_BOUND + getModel().getHeight();

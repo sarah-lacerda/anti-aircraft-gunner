@@ -1,14 +1,15 @@
 package glfw;
 
+import entity.Airplane;
 import entity.Destroyable;
 import entity.Entity;
 import entity.EntityManager;
-import entity.Airplane;
 import entity.Player;
 import entity.Projectile;
 import geometry.Vertex;
 import glfw.listener.KeyListener;
 
+import static entity.Airplane.getProbabilityOfShooting;
 import static entity.Entity.UNIT_OF_MOVEMENT_PER_FRAME;
 import static entity.EntityManager.spawnEnemyPlane;
 import static entity.Projectile.canBeHitBy;
@@ -20,20 +21,29 @@ import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_SHIFT;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_SPACE;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_UP;
+import static util.Randomizer.randomBoolean;
 
 public class Actions {
 
-    private Actions() {}
+    private Actions() {
+    }
 
     public static void handleActions(EntityManager entityManager) {
         handleEnemyMovement(entityManager);
+        handleEnemyShooting(entityManager);
         handleMainCharacterMovement(entityManager);
         handleCollisions(entityManager);
         entityManager.removeDestroyedEntities();
     }
 
+    private static void handleEnemyShooting(EntityManager entityManager) {
+        if (randomBoolean(getProbabilityOfShooting())) {
+            entityManager.add(entityManager.getRandomAirplane().shoot());
+        }
+    }
+
     private static void handleEnemyMovement(EntityManager entityManager) {
-        entityManager.getPlanes().forEach(airplane -> airplane.setPosition(moveRightFrom(airplane.getPosition())));
+        entityManager.getAirplanes().forEach(airplane -> airplane.setPosition(moveRightFrom(airplane.getPosition())));
     }
 
     private static void handleMainCharacterMovement(EntityManager entityManager) {

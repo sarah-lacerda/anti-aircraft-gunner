@@ -19,6 +19,7 @@ import static model.Model.PLAYER_MODEL_FILE_PATH;
 import static model.Model.PROJECTILE_MODEL_FILEPATH;
 import static model.Model.ROCKET_LAUNCHER_MODEL_FILE_PATH;
 import static model.Model.createModelFrom;
+import static util.Randomizer.randomIntWithinRange;
 
 public class EntityManager {
 
@@ -61,12 +62,19 @@ public class EntityManager {
                 .orElseThrow(() -> new IllegalStateException("Player is not instantiated"));
     }
 
-    public List<Airplane> getPlanes() {
+    public List<Airplane> getAirplanes() {
         return entities
                 .stream()
                 .filter(entity -> entity.getClass() == Airplane.class)
                 .map(Airplane.class::cast)
                 .collect(Collectors.toList());
+    }
+
+    public Airplane getRandomAirplane() {
+        if (getAirplanes().size() > 0) {
+            return getAirplanes().get(randomIntWithinRange(0, getAirplanes().size() - 1, 0));
+        }
+        return null;
     }
 
     public void removeDestroyedEntities() {
