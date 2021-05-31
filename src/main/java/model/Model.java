@@ -16,7 +16,13 @@ public class Model {
     public static final String ROCKET_LAUNCHER_MODEL_FILE_PATH = "model/rocketLauncher.json";
     public static final String PROJECTILE_MODEL_FILEPATH = "model/projectile.json";
     public static final String ENEMY_PLANE_1_FILE_PATH = "model/plane1.json";
-    public static final String[] ENEMY_PLANES = new String[]{ENEMY_PLANE_1_FILE_PATH};
+    public static final String ENEMY_PLANE_2_FILE_PATH = "model/plane2.json";
+    public static final String ENEMY_PLANE_3_FILE_PATH = "model/plane3.json";
+    public static final String BUILDING_1_FILE_PATH = "model/house1.json";
+    public static final String BUILDING_2_FILE_PATH = "model/building2.json";
+    public static final String HOUSE_1_FILE_PATH = "model/house1.json";
+    public static final String[] ENEMY_PLANES = new String[]{ENEMY_PLANE_1_FILE_PATH, ENEMY_PLANE_2_FILE_PATH,ENEMY_PLANE_3_FILE_PATH};
+    public static final String[] BUILDINGS = new String[]{BUILDING_1_FILE_PATH, BUILDING_2_FILE_PATH,HOUSE_1_FILE_PATH};
 
     public Model(
             @JsonProperty(required = true, value = "matrixWithColors") String[] matrixWithColors,

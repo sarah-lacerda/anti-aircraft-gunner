@@ -7,8 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static de.damios.guacamole.gdx.StartOnFirstThreadHelper.startNewJvmIfRequired;
-import static entity.EntityManager.createPlayer;
-import static entity.EntityManager.spawnEnemyPlane;
+import static entity.EntityManager.*;
 import static entity.Plane.TOTAL_NUMBER_OF_ENEMY_PLANES;
 
 public class Game {
@@ -25,6 +24,7 @@ public class Game {
     public static List<Entity> createEntities() throws IOException {
         List<Entity> entities = new LinkedList<>();
         entities.add(createPlayer());
+        entities.add(createBuilding());
         createEnemyPlanes(entities);
         return entities;
     }

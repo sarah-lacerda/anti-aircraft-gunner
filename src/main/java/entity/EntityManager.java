@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import static geometry.configuration.World.X_LOWER_BOUND;
 import static geometry.configuration.World.Y_LOWER_BOUND;
 import static model.Model.ENEMY_PLANES;
+import static model.Model.BUILDINGS;
 import static model.Model.PLAYER_MODEL_FILE_PATH;
 import static model.Model.PROJECTILE_MODEL_FILEPATH;
 import static model.Model.ROCKET_LAUNCHER_MODEL_FILE_PATH;
@@ -75,6 +76,12 @@ public class EntityManager {
                 Y_LOWER_BOUND + playerModel.getHeight() + playerModel.getWidth() / 2f
         );
         return new Player(playerModel, rocketLauncherModel, initialPosition);
+    }
+
+    public static Building createBuilding() {
+        final Model Buildings = createModelFrom(BUILDINGS[new Random().nextInt(BUILDINGS.length)]);
+
+        return new Building(Buildings);
     }
 
     public static Projectile createProjectile(Vertex shooterPosition,
