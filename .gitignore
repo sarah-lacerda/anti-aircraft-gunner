@@ -45,6 +45,7 @@ gradle-app.setting
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
+.idea/libraries-with-intellij-classes.xml
 
 # Generated files
 .idea/**/contentModel.xml
