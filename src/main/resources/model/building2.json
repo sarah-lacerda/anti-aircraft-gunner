@@ -1,9 +1,9 @@
 {
   "matrixWithColors": [
-    "WHITE", "WHITE", "WHITE", "WHITE", "WHITE", "WHITE", "WHITE", "black", "WHITE", "WHITE", "WHITE", "WHITE","WHITE","WHITE",
-    "WHITE", "WHITE", "WHITE", "WHITE", "WHITE", "WHITE", "black", "MARRON", "black", "WHITE", "WHITE", "WHITE","WHITE","WHITE",
-    "WHITE", "WHITE", "WHITE", "WHITE", "WHITE", "black", "MARRON", "MARRON", "MARRON", "black", "black", "black","WHITE","WHITE",
-    "WHITE", "WHITE", "WHITE", "WHITE", "black", "MARRON", "MARRON", "MARRON", "MARRON", "MARRON", "black", "black","WHITE","WHITE",
+    "BLANCK", "BLANCK", "BLANCK", "BLANCK", "BLANCK", "BLANCK", "BLANCK", "black", "BLANCK", "BLANCK", "BLANCK", "BLANCK",
+    "BLANCK", "BLANCK", "BLANCK", "BLANCK", "BLANCK", "BLANCK", "black", "MARRON", "black", "BLANCK", "BLANCK", "BLANCK",
+    "BLANCK", "BLANCK", "BLANCK", "BLANCK", "BLANCK", "black", "MARRON", "MARRON", "MARRON", "black", "black", "black",
+    "BLANCK", "BLANCK", "BLANCK", "BLANCK", "black", "MARRON", "MARRON", "MARRON", "MARRON", "MARRON", "black", "black",
     "BLACK", "BLACK", "BLACK", "BLACK", "BLACK", "BLACK", "BLACK", "BLACK", "BLACK", "BLACK", "BLACK", "BLACK",
     "BLACK", "GREEN", "GREEN", "GREEN", "GREEN", "GREEN", "GREEN", "GREEN", "GREEN", "GREEN", "GREEN", "BLACK",
     "BLACK", "GREEN", "GREEN", "GREEN", "GREEN", "GREEN", "GREEN", "GREEN", "GREEN", "GREEN", "GREEN", "BLACK",
