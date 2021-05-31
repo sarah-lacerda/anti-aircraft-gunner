@@ -1,11 +1,9 @@
 import entity.EntityManager;
 import glfw.Window;
 
-import java.io.IOException;
-
 import static de.damios.guacamole.gdx.StartOnFirstThreadHelper.startNewJvmIfRequired;
-import static entity.Building.TOTAL_NUMBER_OF_BUILDINGS;
 import static entity.Airplane.TOTAL_NUMBER_OF_ENEMY_PLANES;
+import static entity.Building.TOTAL_NUMBER_OF_BUILDINGS;
 
 public class Game {
 
@@ -17,7 +15,7 @@ public class Game {
         return entityManager;
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         // Starts a new JVM if the application was started on macOS without the
         // -XstartOnFirstThread argument.
         if (startNewJvmIfRequired()) {
