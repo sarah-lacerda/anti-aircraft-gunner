@@ -12,10 +12,12 @@ public class Model {
     private final String[] matrixWithColors;
     private final Dimension dimension;
 
+    public static final String GAME_OVER_MODEL_FILE_PATH = "model/text/gameOver.json";
+    public static final String YOU_WIN_MODEL_FILE_PATH = "model/text/youWin.json";
     public static final String PLAYER_MODEL_FILE_PATH = "model/player.json";
     public static final String ROCKET_LAUNCHER_MODEL_FILE_PATH = "model/rocketLauncher.json";
-    public static final String PROJECTILE_MODEL_FILEPATH = "model/projectile.json";
-    public static final String ENEMY_PROJECTILE_MODEL_FILEPATH = "model/enemyProjectile.json";
+    public static final String PROJECTILE_MODEL_FILE_PATH = "model/projectile.json";
+    public static final String ENEMY_PROJECTILE_MODEL_FILE_PATH = "model/enemyProjectile.json";
     public static final String ENEMY_PLANE_1_FILE_PATH = "model/plane1.json";
     public static final String ENEMY_PLANE_2_FILE_PATH = "model/plane2.json";
     public static final String ENEMY_PLANE_3_FILE_PATH = "model/plane3.json";

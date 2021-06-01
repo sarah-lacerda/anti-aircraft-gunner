@@ -7,11 +7,14 @@ import entity.Entity;
 import entity.EntityManager;
 import entity.Player;
 import entity.Projectile;
+import entity.Text;
 import geometry.Vertex;
 import glfw.listener.KeyListener;
 
 import static entity.Airplane.getProbabilityOfShooting;
 import static entity.Entity.UNIT_OF_MOVEMENT_PER_FRAME;
+import static entity.EntityManager.createGameOverMessage;
+import static entity.EntityManager.createYouWinMessage;
 import static entity.EntityManager.spawnEnemyPlane;
 import static entity.Projectile.canBeHitBy;
 import static entity.Projectile.isProjectile;
@@ -40,13 +43,9 @@ public class Actions {
     }
 
     private static void handleGameOver(EntityManager entityManager) {
-        if (entityManager.getBuildings().size() == 0 || entityManager.getPlayer().getHealth() == 0) {
-            // TODO: Implement game over text
-            // entityManager.add(createGameOverText());
-        }
-        if (entityManager.getAirplanes().size() == 0) {
-            // TODO: Implement you win
-            // entityManager.add(createYouWinText());
+        if (isGameNotFinished(entityManager)) {
+            checkForGameOver(entityManager);
+            checkForGameWon(entityManager);
         }
     }
 
@@ -70,32 +69,33 @@ public class Actions {
     private static void handleMainCharacterMovement(EntityManager entityManager) {
         final Player player = entityManager.getPlayer();
         final Vertex currentPosition = player.getPosition();
-
         final KeyListener keyListener = KeyListener.getInstance();
 
-        if (keyListener.isKeyPressed(GLFW_KEY_LEFT)) {
-            player.setPosition(moveLeftFrom(currentPosition));
-        }
-        if (keyListener.isKeyPressed(GLFW_KEY_RIGHT)) {
-            player.setPosition(moveRightFrom(currentPosition));
-        }
-        if (keyListener.isKeyPressed(GLFW_KEY_UP)) {
-            player.rotate(1);
-        }
-        if (keyListener.isKeyPressed(GLFW_KEY_DOWN)) {
-            player.rotate(-1);
-        }
-        if (keyListener.isKeyPressed(GLFW_KEY_LEFT_SHIFT) &&
-                KeyListener.getInstance().isKeyPressed(GLFW_KEY_SPACE)) {
+        if (isGameNotFinished(entityManager)) {
+            if (keyListener.isKeyPressed(GLFW_KEY_LEFT)) {
+                player.setPosition(moveLeftFrom(currentPosition));
+            }
+            if (keyListener.isKeyPressed(GLFW_KEY_RIGHT)) {
+                player.setPosition(moveRightFrom(currentPosition));
+            }
+            if (keyListener.isKeyPressed(GLFW_KEY_UP)) {
+                player.rotate(1);
+            }
+            if (keyListener.isKeyPressed(GLFW_KEY_DOWN)) {
+                player.rotate(-1);
+            }
+            if (keyListener.isKeyPressed(GLFW_KEY_LEFT_SHIFT) &&
+                    KeyListener.getInstance().isKeyPressed(GLFW_KEY_SPACE)) {
 
-            entityManager.add(player.shoot());
-            player.unloadRocketLauncher();
+                entityManager.add(player.shoot());
+                player.unloadRocketLauncher();
 
-        } else if (keyListener.isKeyPressed(GLFW_KEY_LEFT_SHIFT)) {
-            player.chargeRocketLauncher();
-        }
-        if (!keyListener.isKeyPressed(GLFW_KEY_LEFT_SHIFT)) {
-            player.unloadRocketLauncher();
+            } else if (keyListener.isKeyPressed(GLFW_KEY_LEFT_SHIFT)) {
+                player.chargeRocketLauncher();
+            }
+            if (!keyListener.isKeyPressed(GLFW_KEY_LEFT_SHIFT)) {
+                player.unloadRocketLauncher();
+            }
         }
     }
 
@@ -155,5 +155,21 @@ public class Actions {
                 currentPosition.getX() + UNIT_OF_MOVEMENT_PER_FRAME,
                 currentPosition.getY()
         );
+    }
+
+    private static void checkForGameWon(EntityManager entityManager) {
+        if (entityManager.getAirplanes().size() == 0) {
+            entityManager.add(createYouWinMessage());
+        }
+    }
+
+    private static void checkForGameOver(EntityManager entityManager) {
+        if (entityManager.getBuildings().size() == 0 || entityManager.getPlayer().getHealth() == 0) {
+            entityManager.add(createGameOverMessage());
+        }
+    }
+
+    public static boolean isGameNotFinished(EntityManager entityManager) {
+        return entityManager.getEntities().stream().noneMatch(entity -> entity.getClass() == Text.class);
     }
 }

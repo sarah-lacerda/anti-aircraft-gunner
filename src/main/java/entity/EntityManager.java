@@ -15,10 +15,12 @@ import static geometry.configuration.World.Y_LOWER_BOUND;
 import static java.util.stream.IntStream.range;
 import static model.Model.BUILDINGS;
 import static model.Model.ENEMY_PLANES;
-import static model.Model.ENEMY_PROJECTILE_MODEL_FILEPATH;
+import static model.Model.ENEMY_PROJECTILE_MODEL_FILE_PATH;
+import static model.Model.GAME_OVER_MODEL_FILE_PATH;
 import static model.Model.PLAYER_MODEL_FILE_PATH;
-import static model.Model.PROJECTILE_MODEL_FILEPATH;
+import static model.Model.PROJECTILE_MODEL_FILE_PATH;
 import static model.Model.ROCKET_LAUNCHER_MODEL_FILE_PATH;
+import static model.Model.YOU_WIN_MODEL_FILE_PATH;
 import static model.Model.createModelFrom;
 import static util.Randomizer.randomIntWithinRange;
 
@@ -86,7 +88,7 @@ public class EntityManager {
                             0,
                             getAirplanes().size() - 1,
                             0)
-                    );
+            );
         }
         return null;
     }
@@ -106,9 +108,19 @@ public class EntityManager {
                                               float angle,
                                               boolean enemy) {
         final Model model = enemy ?
-                createModelFrom(ENEMY_PROJECTILE_MODEL_FILEPATH) : createModelFrom(PROJECTILE_MODEL_FILEPATH);
+                createModelFrom(ENEMY_PROJECTILE_MODEL_FILE_PATH) : createModelFrom(PROJECTILE_MODEL_FILE_PATH);
 
         return new Projectile(model, shooterPosition, shooterDimension, force, angle, enemy);
+    }
+
+    public static Text createYouWinMessage() {
+        final Model model = createModelFrom(YOU_WIN_MODEL_FILE_PATH);
+        return new Text(model, new Vertex(-model.getWidth(), model.getHeight()));
+    }
+
+    public static Text createGameOverMessage() {
+        final Model model = createModelFrom(GAME_OVER_MODEL_FILE_PATH);
+        return new Text(model, new Vertex(-model.getWidth(), model.getHeight()));
     }
 
     private static Player createPlayer() {
