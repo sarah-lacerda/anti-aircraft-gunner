@@ -84,13 +84,11 @@ public class Actions {
             if (keyListener.isKeyPressed(GLFW_KEY_DOWN)) {
                 player.rotate(-1);
             }
-            if (keyListener.isKeyPressed(GLFW_KEY_LEFT_SHIFT) &&
-                    KeyListener.getInstance().isKeyPressed(GLFW_KEY_SPACE)) {
-
+            if (KeyListener.getInstance().isKeyPressed(GLFW_KEY_SPACE)) {
                 entityManager.add(player.shoot());
                 player.unloadRocketLauncher();
-
-            } else if (keyListener.isKeyPressed(GLFW_KEY_LEFT_SHIFT)) {
+            }
+            if (keyListener.isKeyPressed(GLFW_KEY_LEFT_SHIFT)) {
                 player.chargeRocketLauncher();
             }
             if (!keyListener.isKeyPressed(GLFW_KEY_LEFT_SHIFT)) {
