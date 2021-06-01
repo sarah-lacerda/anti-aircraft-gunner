@@ -19,7 +19,7 @@ public class Entity {
      *
      * SPEED = {UNIT_OF_SCREEN_WIDTH} / {TIME_IN_SECONDS_TO_CROSS_WIDTH}
      * */
-    private final static float SPEED = 1f / 15f;
+    public final static float SPEED = 1f / 15f;
 
     public final static float UNIT_OF_MOVEMENT_PER_FRAME = ((float) WORLD_WIDTH / (float) FRAMES_PER_SECOND) * SPEED;
 

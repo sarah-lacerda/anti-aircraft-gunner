@@ -19,14 +19,15 @@ public class Airplane extends Enemy {
     private boolean ableToShoot;
     private float rotationAngle;
 
-    public static final int MINIMUM_X_SPAWN_POSITION = X_LOWER_BOUND - 100;
-    public static final int MAXIMUM_X_SPAWN_POSITION = X_LOWER_BOUND;
-    public static final int MINIMUM_FLIGHT_LEVEL = 10;
-    public static final int MINIMUM_X_DISTANCE_BETWEEN_PLANES = WORLD_WIDTH / 10;
-    public static final int MINIMUM_Y_DISTANCE_BETWEEN_PLANES = WORLD_HEIGHT / 10;
     public static final int TOTAL_NUMBER_OF_ENEMY_PLANES = 10;
-    public static final float INITIAL_PROBABILITY_OF_SHOOTING = .001f;
-    public static final float MAXIMUM_PROBABILITY_OF_SHOOTING = .01f;
+    private static final int MINIMUM_X_SPAWN_POSITION = X_LOWER_BOUND - 100;
+    private static final int MAXIMUM_X_SPAWN_POSITION = X_LOWER_BOUND;
+    private static final int MINIMUM_FLIGHT_LEVEL = 10;
+    private static final int MINIMUM_X_DISTANCE_BETWEEN_PLANES = WORLD_WIDTH / 10;
+    private static final int MINIMUM_Y_DISTANCE_BETWEEN_PLANES = WORLD_HEIGHT / 10;
+    private static final float INITIAL_PROBABILITY_OF_SHOOTING = .01f;
+    private static final float MAXIMUM_PROBABILITY_OF_SHOOTING = .01f;
+    private static final float FORCE = WORLD_WIDTH * SPEED;
 
     public Airplane(Model model) {
         super(model, randomValidPosition());
@@ -38,7 +39,7 @@ public class Airplane extends Enemy {
     public Projectile shoot() {
         if (!destroyed && isVisible() && ableToShoot) {
             ableToShoot = false;
-            return createProjectile(getPosition(), getDimension(), 1, rotationAngle, true);
+            return createProjectile(getPosition(), getDimension(), FORCE, -90, true);
         }
         return null;
     }
