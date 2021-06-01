@@ -35,7 +35,19 @@ public class Actions {
         handleMainCharacterMovement(entityManager);
         handleBuildingDestruction(entityManager);
         handleCollisions(entityManager);
+        handleGameOver(entityManager);
         entityManager.removeDestroyedEntities();
+    }
+
+    private static void handleGameOver(EntityManager entityManager) {
+        if (entityManager.getBuildings().size() == 0 || entityManager.getPlayer().getHealth() == 0) {
+            // TODO: Implement game over text
+            // entityManager.add(createGameOverText());
+        }
+        if (entityManager.getAirplanes().size() == 0) {
+            // TODO: Implement you win
+            // entityManager.add(createYouWinText());
+        }
     }
 
     private static void handleBuildingDestruction(EntityManager entityManager) {
@@ -44,7 +56,10 @@ public class Actions {
 
     private static void handleEnemyShooting(EntityManager entityManager) {
         if (randomBoolean(getProbabilityOfShooting())) {
-            entityManager.add(entityManager.getRandomAirplane().shoot());
+            final Airplane randomAirplane = entityManager.getRandomAirplane();
+            if (randomAirplane != null) {
+                entityManager.add(randomAirplane.shoot());
+            }
         }
     }
 
@@ -93,8 +108,7 @@ public class Actions {
                     if (collisionBetweenPlanes(entity1, entity2)) {
                         removeAndCreateNewAirplane((Airplane) entity1, entityManager);
                     } else {
-                        registerCollisionBetween(entityManager.getEntities().get(i),
-                                entityManager.getEntities().get(j));
+                        entityManager.remove(registerCollisionBetween(entity1, entity2));
                     }
                 }
             }
@@ -106,17 +120,20 @@ public class Actions {
         entityManager.add(spawnEnemyPlane());
     }
 
-    private static void registerCollisionBetween(Entity entity1, Entity entity2) {
+    private static Entity registerCollisionBetween(Entity entity1, Entity entity2) {
         if (isProjectile(entity1)) {
             if (canBeHitBy((Projectile) entity1, entity2)) {
                 ((Destroyable) entity2).hit();
+                return entity1;
             }
         }
         if (isProjectile(entity2)) {
             if (canBeHitBy((Projectile) entity2, entity1)) {
                 ((Destroyable) entity1).hit();
+                return entity2;
             }
         }
+        return null;
     }
 
     private static boolean collisionBetweenPlanes(Entity entity1, Entity entity2) {

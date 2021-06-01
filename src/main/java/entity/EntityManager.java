@@ -81,7 +81,12 @@ public class EntityManager {
 
     public Airplane getRandomAirplane() {
         if (getAirplanes().size() > 0) {
-            return getAirplanes().get(randomIntWithinRange(0, getAirplanes().size() - 1, 0));
+            return getAirplanes().get(
+                    randomIntWithinRange(
+                            0,
+                            getAirplanes().size() - 1,
+                            0)
+                    );
         }
         return null;
     }

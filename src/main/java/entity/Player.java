@@ -11,8 +11,10 @@ public class Player extends Friendly {
 
     private final RocketLauncher rocketLauncher;
     private float rotationAngle;
+    private int health;
 
     private final static float MAX_ANGLE_ROTATION = 80f;
+    private final static int MAX_HEALTH = 3;
 
     public Player(Model playerModel, Model rocketLauncherModel, Vertex position) {
         super(playerModel, position);
@@ -23,6 +25,7 @@ public class Player extends Friendly {
                 position,
                 playerModel.getDimension()
         );
+        this.health = MAX_HEALTH;
     }
 
     public void unloadRocketLauncher() {
@@ -48,7 +51,7 @@ public class Player extends Friendly {
 
     @Override
     public void hit() {
-        // TODO: Implement me!
+        health--;
     }
 
     @Override
@@ -83,5 +86,9 @@ public class Player extends Friendly {
 
     private boolean isPositionValid(Vertex position) {
         return position.getX() > X_LOWER_BOUND && position.getX() < X_UPPER_BOUND - getDimension().getWidth();
+    }
+
+    public int getHealth() {
+        return health;
     }
 }
