@@ -19,6 +19,7 @@ public enum Color {
     GREEN(0.000f, 0.502f, 0.000f),
     PURPLE(0.502f, 0.000f, 0.502f),
     TEAL(0.000f, 0.502f, 0.502f),
+    VIOLET(0.933f, 0.510f, 0.933f),
     NAVY(0.000f, 0.000f, 0.502f);
 
     private final float red;

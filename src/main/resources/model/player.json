@@ -1,12 +1,12 @@
 {
   "matrixWithColors": [
-    "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "olive", "olive", "olive", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK",
-    "BLANK", "BLANK", "BLANK", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "BLANK", "BLANK", "BLANK",
-    "BLANK", "BLANK", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "BLANK", "BLANK",
-    "BLANK", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "BLANK",
-    "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive", "olive",
-    "BLANK", "BLANK", "olive", "olive", "olive", "BLANK", "olive", "BLANK", "olive", "olive", "olive", "BLANK", "BLANK",
-    "BLANK", "BLANK", "BLANK", "olive", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "olive", "BLANK" , "BLANK", "BLANK"
+    "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLACK", "BLACK", "BLACK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK",
+    "BLANK", "BLANK", "BLANK", "BLACK", "BLACK", "VIOLET", "VIOLET", "VIOLET", "BLACK", "BLACK", "BLANK", "BLANK", "BLANK",
+    "BLANK", "BLANK", "BLACK", "VIOLET", "VIOLET", "VIOLET", "yellow", "VIOLET", "VIOLET", "VIOLET", "BLACK", "BLANK", "BLANK",
+    "BLANK", "BLACK", "VIOLET", "VIOLET", "VIOLET", "VIOLET", "VIOLET", "VIOLET", "VIOLET", "VIOLET", "VIOLET", "BLACK", "BLANK",
+    "BLACK", "BLACK", "VIOLET", "VIOLET", "VIOLET", "BLACK", "VIOLET", "BLACK", "VIOLET", "VIOLET", "VIOLET", "BLACK", "BLACK",
+    "BLANK", "BLANK", "BLACK", "yellow", "BLACK", "BLANK", "BLACK", "BLANK", "BLACK", "yellow", "BLACK", "BLANK", "BLANK",
+    "BLANK", "BLANK", "BLANK", "BLACK", "BLANK", "BLANK", "BLANK", "BLANK", "BLANK", "BLACK", "BLANK" , "BLANK", "BLANK"
   ],
   "columns": 13,
   "lines": 7
