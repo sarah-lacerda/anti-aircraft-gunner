@@ -12,9 +12,9 @@ import static util.Randomizer.randomIntWithinRange;
 public class Building extends Friendly {
     private boolean destroyed;
 
-    private static final int MINIMUM_X_SPAWN_POSITION = X_LOWER_BOUND + 15;
-    private static final int MAXIMUM_X_SPAWN_POSITION = X_UPPER_BOUND;
-    private static final int MINIMUM_DISTANCE_BETWEEN_BUILDINGS = WORLD_WIDTH / 5;
+    private static final int MINIMUM_X_SPAWN_POSITION = X_LOWER_BOUND + 50;
+    private static final int MAXIMUM_X_SPAWN_POSITION = X_UPPER_BOUND - 10;
+    private static final int MINIMUM_DISTANCE_BETWEEN_BUILDINGS = WORLD_WIDTH / 7;
     public static final int TOTAL_NUMBER_OF_BUILDINGS = 5;
 
     public Building(Model model) {
