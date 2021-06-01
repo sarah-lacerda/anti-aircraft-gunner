@@ -25,8 +25,8 @@ public class Airplane extends Enemy {
     private static final int MINIMUM_FLIGHT_LEVEL = 10;
     private static final int MINIMUM_X_DISTANCE_BETWEEN_PLANES = WORLD_WIDTH / 10;
     private static final int MINIMUM_Y_DISTANCE_BETWEEN_PLANES = WORLD_HEIGHT / 10;
-    private static final float INITIAL_PROBABILITY_OF_SHOOTING = .01f;
-    private static final float MAXIMUM_PROBABILITY_OF_SHOOTING = .01f;
+    private static final float INITIAL_PROBABILITY_OF_SHOOTING = .002f;
+    private static final float MAXIMUM_PROBABILITY_OF_SHOOTING = .05f;
     private static final float FORCE = WORLD_WIDTH * SPEED;
 
     public Airplane(Model model) {
