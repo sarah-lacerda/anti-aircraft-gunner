@@ -11,6 +11,7 @@ import java.util.Objects;
 
 import static geometry.configuration.World.setCoordinatePlane;
 import static glfw.Actions.handleActions;
+import static glfw.Icon.loadIconFrom;
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.GLFW_CONTEXT_VERSION_MAJOR;
 import static org.lwjgl.glfw.GLFW.GLFW_CONTEXT_VERSION_MINOR;
@@ -29,6 +30,7 @@ import static org.lwjgl.glfw.GLFW.glfwMakeContextCurrent;
 import static org.lwjgl.glfw.GLFW.glfwPollEvents;
 import static org.lwjgl.glfw.GLFW.glfwSetErrorCallback;
 import static org.lwjgl.glfw.GLFW.glfwSetKeyCallback;
+import static org.lwjgl.glfw.GLFW.glfwSetWindowIcon;
 import static org.lwjgl.glfw.GLFW.glfwSetWindowSizeCallback;
 import static org.lwjgl.glfw.GLFW.glfwSetWindowSizeLimits;
 import static org.lwjgl.glfw.GLFW.glfwShowWindow;
@@ -63,6 +65,7 @@ public class Window {
     private static final int MAX_WIDTH = GL_DONT_CARE;
     private static final int MAX_HEIGHT = GL_DONT_CARE;
     private static final String TITLE = "Anti-aircraft Gunner";
+    private static final String ICON_FILEPATH = "icon.png";
     private static final Color BACKGROUND_COLOR = WHITE;
 
     private Window() {
@@ -167,6 +170,8 @@ public class Window {
         glfwSetWindowSizeLimits(windowAddress, MIN_WIDTH, MIN_HEIGHT, MAX_WIDTH, MAX_HEIGHT);
         glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
         useClientVersion3(false);
+
+        glfwSetWindowIcon(windowAddress, loadIconFrom(ICON_FILEPATH).getImage());
 
         return windowAddress;
     }
