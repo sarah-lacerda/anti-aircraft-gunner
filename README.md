@@ -14,11 +14,11 @@ _**A simple OpenGL 2d game written in Java where you control a vehicle that shoo
 The `.jar` and `.exe` files can be downloaded directly from the _Releases section_ ![right here](https://github.com/sarah-lacerda/anti-aircraft-gunner/releases).
 ####
 #### If you would like to clone this repository, play around and recompile it:
-This is a Gradle project, so by just running `./gradlew build` should compile everything and get you all set without needing to take care of any dependencies.
+This is a Gradle project, so by just running `./gradlew build` should get you all set and have everything compiled without needing to take care of any dependencies.
 
 # How to play 🎮
 
-<img src="/docs/sampleAnimation.gif" width="500"/> <img src="/docs/gameOver.gif" width="500"/>
+<img src="/docs/sampleAnimation.gif" width="450"/> <img src="/docs/gameOver.gif" width="500"/>
 
 
 | Action  | Description                                                                                                         |
@@ -31,8 +31,8 @@ This is a Gradle project, so by just running `./gradlew build` should compile ev
 ### NOTES:
 
 * The longer you hold the `SHIFT` key the more powerful your projectile will be when you shoot.
-Unfortunately, since excess of power leads to corruption, there's a limit for how powerful your shot can be (yeah I know 😥).
-You will see when your launcher has already reached its full capacity when the arrow turns right, like the image below.
+Unfortunately, since excess of power leads to corruption, there's a limit for how powerful your shot can be (yeah I know 😥).  
+You will see when your launcher has already reached its full capacity when the arrow turns red, like the image below.
 
 <img src="/docs/fullPower.png" width="80"/>
 
