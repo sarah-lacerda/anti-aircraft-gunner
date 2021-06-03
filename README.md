@@ -18,7 +18,7 @@ This is a Gradle project, so by just running `./gradlew build` should get you al
 
 # How to play 🎮
 
-<img src="/docs/sampleAnimation.gif" width="450"/> <img src="/docs/gameOver.gif" width="450"/>
+<img src="/docs/sampleAnimation.gif" width="400"/> <img src="/docs/gameOver.gif" width="400"/>
 
 
 | Action  | Description                                                                                                         |
